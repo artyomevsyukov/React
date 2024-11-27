@@ -14,7 +14,6 @@ function JournalForm() {
         e.preventDefault();
         const formData = new FormData(e.target);
         const formProps = Object.fromEntries(formData);
-        console.log(formData);
         console.log(formProps);
     };
 
@@ -30,7 +29,12 @@ function JournalForm() {
                     onChange={inputChange}
                 />
                 <textarea name="post" id="" cols="30"></textarea>
-                <Button text={'Сохронить'} />
+                <Button
+                    text={'Сохронить'}
+                    onClick={() => {
+                        console.log('object');
+                    }}
+                />
             </form>
         </>
     );
