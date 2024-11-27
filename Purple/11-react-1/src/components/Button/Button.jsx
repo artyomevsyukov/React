@@ -8,7 +8,7 @@ function Button() {
 
     const clicked = () => {
         // setText('Close');
-        setText((t) => t + '!');
+        setText(t => t + '!');
         console.log('text:', text);
     };
 
