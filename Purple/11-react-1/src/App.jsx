@@ -2,6 +2,11 @@ import './App.css';
 import Button from './components/Button/Button';
 import JournalItem from './components/JournalItem/JournalItem';
 import CardButton from './components/CardButton/CardButton';
+import LeftPanel from './layout/LeftPanel/LeftPanel';
+import Body from './layout/Body/Body';
+import Header from './components/Header/Header';
+import JournalList from './components/JournalList/JournalList';
+import JournalAddButton from './components/JournalAddButton/JournalAddButton';
 
 function App() {
     const data = [
@@ -28,39 +33,46 @@ function App() {
     ];
 
     return (
-        <>
-            <h1>Заголовок</h1>
-            <p>Какой-то текст</p>
-            <Button />
-            <CardButton>
-                <JournalItem
-                    title={data[0].title}
-                    text={data[0].text}
-                    date={data[0].date}
-                />
+        <div className="app">
+            {/* <Button /> */}
 
-                {/* {data.map((item, index) => (
+            <LeftPanel>
+                <Header />
+                <JournalList>
+                    <JournalAddButton />
+                    <CardButton>
+                        <JournalItem
+                            title={data[0].title}
+                            text={data[0].text}
+                            date={data[0].date}
+                        />
+
+                        {/* {data.map((item, index) => (
 					<JournalItem key={index} data={item} />
 				))} */}
 
-                {/* <JournalItem data={data[0]} />
+                        {/* <JournalItem data={data[0]} />
 				<JournalItem data={data[1]} />
 				<JournalItem data={data[2]} /> */}
-            </CardButton>
-            <CardButton>
-                <JournalItem
-                    title={data[1].title}
-                    text={data[1].text}
-                    date={data[1].date}
-                />
-            </CardButton>
+                    </CardButton>
+                    <CardButton>
+                        <JournalItem
+                            title={data[1].title}
+                            text={data[1].text}
+                            date={data[1].date}
+                        />
+                    </CardButton>
+                </JournalList>
+            </LeftPanel>
+            <Body>Body</Body>
+
             {/* {data.map((item, index) => {
 				return <JournalItem key={index} data={item} />;
 			})} */}
             {/* {data.map((item, index) => (
 				<JournalItem key={index} data={item} />
 			))} */}
-        </>
+        </div>
     );
 }
 
