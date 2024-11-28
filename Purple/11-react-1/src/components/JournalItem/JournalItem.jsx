@@ -1,13 +1,13 @@
 import './JournalItem.css';
 
-function JournalItem({ title, text, date, },) {
-    const formateDate = new Intl.DateTimeFormat('ru-Ru').format(date);
+// function JournalItem({ title, text, date }) {
+//     const formateDate = new Intl.DateTimeFormat('ru-Ru').format(date);
 
-    // function JournalItem(props,) {
-    // // console.log('props:', props,);
-    // // console.log('props.data: ',props.data,);
-    // const {title, text, date,} = props.data;
-    // const formateDate = new Intl.DateTimeFormat('ru-Ru').format(date);
+function JournalItem(props) {
+    // console.log('props:', props);
+    // console.log('props.data: ', props.data);
+    const { title, text, date } = props.data;
+    const formateDate = new Intl.DateTimeFormat('ru-Ru').format(date);
 
     return (
         <>

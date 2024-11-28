@@ -1,20 +1,21 @@
 import './JournalForm.css';
-import { useState } from 'react';
+// import { useState } from 'react';
 import Button from '../Button/Button';
 
-function JournalForm() {
-    const [inputData, setInputData] = useState('');
+function JournalForm({ onSubmit }) {
+    // const [inputData, setInputData] = useState('');
 
-    const inputChange = e => {
-        setInputData(e.target.value);
-        console.log(inputData);
-    };
+    // const inputChange = e => {
+    //     setInputData(e.target.value);
+    //     console.log(inputData);
+    // };
 
     const addJournalItem = e => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const formProps = Object.fromEntries(formData);
         console.log(formProps);
+        onSubmit(formProps);
     };
 
     return (
@@ -25,15 +26,15 @@ function JournalForm() {
                 <input
                     type="text"
                     name="tag"
-                    value={inputData}
-                    onChange={inputChange}
+                    /*   value={inputData}
+                    onChange={inputChange} */
                 />
-                <textarea name="post" id="" cols="30"></textarea>
+                <textarea name="text" id="" cols="30"></textarea>
                 <Button
                     text={'Сохронить'}
-                    onClick={() => {
-                        console.log('object');
-                    }}
+                    // onClick={() => {
+                    //     console.log('object');
+                    // }}
                 />
             </form>
         </>
