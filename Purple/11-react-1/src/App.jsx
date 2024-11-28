@@ -1,6 +1,6 @@
 import './App.css';
-import JournalItem from './components/JournalItem/JournalItem';
-import CardButton from './components/CardButton/CardButton';
+// import JournalItem from './components/JournalItem/JournalItem';
+// import CardButton from './components/CardButton/CardButton';
 import LeftPanel from './layout/LeftPanel/LeftPanel';
 import Body from './layout/Body/Body';
 import Header from './components/Header/Header';
@@ -11,28 +11,19 @@ import { useState } from 'react';
 
 function App() {
     const INITIAL_DATA = [
-        {
-            id: 1,
-            title: 'Подготовка к обновлению курсов',
-            text: 'Горные походы открывают удивительные природные ландшафт',
-            date: new Date(),
-        },
-        {
-            id: 2,
-            title: 'Поход в годы',
-            text: 'Думал, что очень много времени',
-            date: new Date(),
-        },
+        // {
+        //     id: 1,
+        //     title: 'Подготовка к обновлению курсов',
+        //     text: 'Горные походы открывают удивительные природные ландшафт',
+        //     date: new Date(),
+        // },
+        // {
+        //     id: 2,
+        //     title: 'Поход в годы',
+        //     text: 'Думал, что очень много времени',
+        //     date: new Date(),
+        // },
     ];
-
-    function sortItem(a, b) {
-        if (a.date < b.date) {
-            return 1;
-        } else {
-            return -1;
-        }
-    }
-
     const [items, setItems] = useState(INITIAL_DATA);
 
     const addItem = item => {
@@ -42,22 +33,57 @@ function App() {
                 title: item.title,
                 text: item.text,
                 date: new Date(item.date),
-                id: Math.max(...oldItems.map(item => item.id)) + 1,
+                // id: Math.max(0, ...oldItems.map(item => item.id)) + 1,
+                id:
+                    oldItems.length > 0
+                        ? Math.max(0, ...oldItems.map(item => item.id)) + 1
+                        : 1,
             },
         ]);
     };
+
+    // function sortItem(a, b) {
+    //     if (a.date < b.date) {
+    //         return 1;
+    //     } else {
+    //         return -1;
+    //     }
+    // }
+
+    // let list = <p>Записей пока нет, добавьте первую</p>;
+    // if (items.length > 0) {
+    //     list = items.sort(sortItem).map(item => (
+    //         <CardButton key={item.id}>
+    //             <JournalItem data={item} />
+    //         </CardButton>
+    //     ));
+    // }
 
     return (
         <div className="app">
             <LeftPanel>
                 <Header />
-                <JournalList>
+                <JournalList items={items}>
                     <JournalAddButton />
-                    {items.sort(sortItem).map(item => (
-                        <CardButton key={item.id}>
-                            <JournalItem data={item} />
-                        </CardButton>
-                    ))}
+                    {/* {list} */}
+                    {/* {items.length === 0 ? (
+                        <p>Записей пока нет, добавьте первую</p>
+                    ) : (
+                        items.sort(sortItem).map(item => (
+                            <CardButton key={item.id}>
+                                <JournalItem data={item} />
+                            </CardButton>
+                        ))
+                    )} */}
+                    {/* {items.length === 0 && (
+                        <p>Записей пока нет, добавьте первую</p>
+                    )}
+                    {items.length > 0 &&
+                        items.sort(sortItem).map(item => (
+                            <CardButton key={item.id}>
+                                <JournalItem data={item} />
+                            </CardButton>
+                        ))} */}
                     {/* <CardButton>
                         <JournalItem
                             title={data[0].title}
@@ -79,7 +105,7 @@ function App() {
                 </JournalList>
             </LeftPanel>
             <Body>
-                <JournalForm onSubmit={addItem} />
+                <JournalForm submit={addItem} />
             </Body>
 
             {/* {data.map((item, index) => {

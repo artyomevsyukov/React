@@ -2,7 +2,7 @@ import './JournalForm.css';
 // import { useState } from 'react';
 import Button from '../Button/Button';
 
-function JournalForm({ onSubmit }) {
+function JournalForm({ submit }) {
     // const [inputData, setInputData] = useState('');
 
     // const inputChange = e => {
@@ -15,7 +15,7 @@ function JournalForm({ onSubmit }) {
         const formData = new FormData(e.target);
         const formProps = Object.fromEntries(formData);
         console.log(formProps);
-        onSubmit(formProps);
+        submit(formProps);
     };
 
     return (
@@ -30,12 +30,25 @@ function JournalForm({ onSubmit }) {
                     onChange={inputChange} */
                 />
                 <textarea name="text" id="" cols="30"></textarea>
-                <Button
+                {/* <Button
+                    type="button"
                     text={'Сохронить'}
                     // onClick={() => {
                     //     console.log('object');
                     // }}
+                /> */}
+                {/* Кнопка "Отправить форму" */}
+                {/* <Button text="Сохранить" /> */}
+                <Button text="Сохранить" type="submit" />
+                {/* Кнопка "Просто действие" */}
+                <Button
+                    text="Другое действие"
+                    onClick={() => console.log('Это не отправка формы')}
+                    type="button"
                 />
+
+                {/* Кнопка "Сброс формы" */}
+                <Button text="Сбросить" type="reset" />
             </form>
         </>
     );
