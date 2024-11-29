@@ -1,6 +1,7 @@
 import styles from './JournalForm.module.css';
 import Button from '../Button/Button';
 import { useState } from 'react';
+import classNames from 'classnames';
 
 function JournalForm({ submit }) {
     const [formValidateState, setFormValidateState] = useState({
@@ -45,23 +46,33 @@ function JournalForm({ submit }) {
 
     return (
         <>
+            {/* <form className={styles['journal-form']} onSubmit={addJournalItem}> */}
             <form className={styles['journal-form']} onSubmit={addJournalItem}>
                 <input
                     type="text"
                     name="title"
-                    className={`${styles['input']} ${formValidateState.title ? '' : styles['invalid']}`}
+                    // className={`${styles['input']} ${formValidateState.title ? '' : styles['invalid']}`}
+                    className={classNames(styles['input'], {
+                        [styles['invalid']]: !formValidateState.title,
+                    })}
                 />
                 <input
                     type="date"
                     name="date"
-                    className={`${styles['input']} ${formValidateState.date ? '' : styles['invalid']}`}
+                    // className={`${styles['input']} ${formValidateState.date ? '' : styles['invalid']}`}
+                    className={classNames(styles['input'], {
+                        [styles['invalid']]: !formValidateState.date,
+                    })}
                 />
                 <input type="text" name="tag" />
                 <textarea
                     name="text"
                     id=""
                     cols="30"
-                    className={`${styles['input']} ${formValidateState.text ? '' : styles['invalid']}`}
+                    // className={`${styles['input']} ${formValidateState.text ? '' : styles['invalid']}`}
+                    className={classNames(styles['input'], {
+                        [styles['invalid']]: !formValidateState.text,
+                    })}
                 ></textarea>
 
                 <Button
