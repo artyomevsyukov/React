@@ -49,31 +49,19 @@ function JournalForm({ submit }) {
                 <input
                     type="text"
                     name="title"
-                    style={{
-                        border: formValidateState.title
-                            ? undefined
-                            : '1px solid red',
-                    }}
+                    className={`input ${formValidateState.title ? '' : 'invalid'}`}
                 />
                 <input
                     type="date"
                     name="date"
-                    style={{
-                        border: formValidateState.date
-                            ? undefined
-                            : '1px solid red',
-                    }}
+                    className={`input ${formValidateState.date ? '' : 'invalid'}`}
                 />
                 <input type="text" name="tag" />
                 <textarea
                     name="text"
                     id=""
                     cols="30"
-                    style={{
-                        border: formValidateState.text
-                            ? undefined
-                            : '1px solid red',
-                    }}
+                    className={`input ${formValidateState.text ? '' : 'invalid'}`}
                 ></textarea>
 
                 <Button
