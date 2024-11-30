@@ -89,6 +89,7 @@ function JournalForm({ submit }) {
                     id=""
                     cols="30"
                     rows="10"
+                    spellCheck="true"
                     // className={`${styles['input']} ${formValidateState.text ? '' : styles['invalid']}`}
                     className={classNames(styles['input'], {
                         [styles['invalid']]: !formValidateState.post,
