@@ -11,18 +11,18 @@ import { useState } from 'react';
 
 function App() {
     const INITIAL_DATA = [
-        // {
-        //     id: 1,
-        //     title: 'Подготовка к обновлению курсов',
-        //     text: 'Горные походы открывают удивительные природные ландшафт',
-        //     date: new Date(),
-        // },
-        // {
-        //     id: 2,
-        //     title: 'Поход в годы',
-        //     text: 'Думал, что очень много времени',
-        //     date: new Date(),
-        // },
+        {
+            id: 1,
+            title: 'Подготовка к обновлению курсов',
+            post: 'Горные походы открывают удивительные природные ландшафт',
+            date: new Date(),
+        },
+        {
+            id: 2,
+            title: 'Поход в годы',
+            post: 'Думал, что очень много времени',
+            date: new Date(),
+        },
     ];
     const [items, setItems] = useState(INITIAL_DATA);
 
@@ -31,7 +31,7 @@ function App() {
             ...oldItems,
             {
                 title: item.title,
-                text: item.text,
+                post: item.post,
                 date: new Date(item.date),
                 // id: Math.max(0, ...oldItems.map(item => item.id)) + 1,
                 id:
