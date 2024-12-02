@@ -1,13 +1,13 @@
-import "./App.css";
+import './App.css'
 // import JournalItem from './components/JournalItem/JournalItem';
 // import CardButton from './components/CardButton/CardButton';
-import LeftPanel from "./layout/LeftPanel/LeftPanel";
-import Body from "./layout/Body/Body";
-import Header from "./components/Header/Header";
-import JournalList from "./components/JournalList/JournalList";
-import JournalAddButton from "./components/JournalAddButton/JournalAddButton";
-import JournalForm from "./components/JournalForm/JournalForm";
-import { useEffect, useState } from "react";
+import LeftPanel from './layout/LeftPanel/LeftPanel'
+import Body from './layout/Body/Body'
+import Header from './components/Header/Header'
+import JournalList from './components/JournalList/JournalList'
+import JournalAddButton from './components/JournalAddButton/JournalAddButton'
+import JournalForm from './components/JournalForm/JournalForm'
+import { useEffect, useState } from 'react'
 
 function App() {
     // [
@@ -42,14 +42,14 @@ function App() {
     // const [items, setItems] = useState([]);
 
     const [items, setItems] = useState(() => {
-        const data = JSON.parse(localStorage.getItem("data"));
+        const data = JSON.parse(localStorage.getItem('data'))
         return data
             ? data.map(item => ({
                   ...item,
                   date: new Date(item.date),
               }))
-            : [];
-    });
+            : []
+    })
 
     // const [items, setItems] = useState([]);
 
@@ -67,9 +67,9 @@ function App() {
 
     useEffect(() => {
         if (items.length > 0) {
-            localStorage.setItem("data", JSON.stringify(items));
+            localStorage.setItem('data', JSON.stringify(items))
         }
-    }, [items]);
+    }, [items])
 
     const addItem = item => {
         setItems(oldItems => [
@@ -84,8 +84,8 @@ function App() {
                         ? Math.max(0, ...oldItems.map(item => item.id)) + 1
                         : 1,
             },
-        ]);
-    };
+        ])
+    }
 
     return (
         <div className="app">
@@ -143,7 +143,7 @@ function App() {
 				<JournalItem key={index} data={item} />
 			))} */}
         </div>
-    );
+    )
 }
 
-export default App;
+export default App

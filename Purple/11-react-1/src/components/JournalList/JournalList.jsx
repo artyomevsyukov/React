@@ -1,16 +1,16 @@
-import "./JournalList.css";
-import CardButton from "../CardButton/CardButton";
-import JournalItem from "../JournalItem/JournalItem";
+import './JournalList.css'
+import CardButton from '../CardButton/CardButton'
+import JournalItem from '../JournalItem/JournalItem'
 
 function JournalList({ items }) {
     if (items.length === 0) {
-        return <p>Записей пока нет, добавьте первую</p>;
+        return <p>Записей пока нет, добавьте первую</p>
     }
     function sortItem(a, b) {
         if (a.date < b.date) {
-            return 1;
+            return 1
         } else {
-            return -1;
+            return -1
         }
     }
 
@@ -22,9 +22,9 @@ function JournalList({ items }) {
                 </CardButton>
             ))}
         </div>
-    );
+    )
 
     // return <div className="lournal-list">{items}</div>;
 }
 
-export default JournalList;
+export default JournalList

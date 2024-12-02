@@ -1,4 +1,4 @@
-import "./JournalItem.css";
+import './JournalItem.css'
 
 // function JournalItem({ title, text, date }) {
 //     const formateDate = new Intl.DateTimeFormat('ru-Ru').format(date);
@@ -6,8 +6,8 @@ import "./JournalItem.css";
 function JournalItem(props) {
     // console.log('props:', props);
     // console.log('props.data: ', props.data);
-    const { title, post, date } = props.data;
-    const formateDate = new Intl.DateTimeFormat("ru-Ru").format(date);
+    const { title, post, date } = props.data
+    const formateDate = new Intl.DateTimeFormat('ru-Ru').format(date)
 
     return (
         <>
@@ -17,7 +17,7 @@ function JournalItem(props) {
                 <div className="journal-item__post">{post}</div>
             </h2>
         </>
-    );
+    )
 }
 
-export default JournalItem;
+export default JournalItem
