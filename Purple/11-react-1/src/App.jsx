@@ -1,30 +1,75 @@
-import './App.css';
+import "./App.css";
 // import JournalItem from './components/JournalItem/JournalItem';
 // import CardButton from './components/CardButton/CardButton';
-import LeftPanel from './layout/LeftPanel/LeftPanel';
-import Body from './layout/Body/Body';
-import Header from './components/Header/Header';
-import JournalList from './components/JournalList/JournalList';
-import JournalAddButton from './components/JournalAddButton/JournalAddButton';
-import JournalForm from './components/JournalForm/JournalForm';
-import { useState } from 'react';
+import LeftPanel from "./layout/LeftPanel/LeftPanel";
+import Body from "./layout/Body/Body";
+import Header from "./components/Header/Header";
+import JournalList from "./components/JournalList/JournalList";
+import JournalAddButton from "./components/JournalAddButton/JournalAddButton";
+import JournalForm from "./components/JournalForm/JournalForm";
+import { useEffect, useState } from "react";
 
 function App() {
-    const INITIAL_DATA = [
-        {
-            id: 1,
-            title: 'Подготовка к обновлению курсов',
-            post: 'Горные походы открывают удивительные природные ландшафт',
-            date: new Date(),
-        },
-        {
-            id: 2,
-            title: 'Поход в годы',
-            post: 'Думал, что очень много времени',
-            date: new Date(),
-        },
-    ];
-    const [items, setItems] = useState(INITIAL_DATA);
+    // [
+    //     {
+    //         id: 1,
+    //         title: "Подготовка к обновлению курсов",
+    //         post: "Горные походы открывают удивительные природные ландшафт",
+    //         date: "02/12/2024",
+    //     },
+    //     {
+    //         id: 2,
+    //         title: "Поход в годы",
+    //         post: "Думал, что очень много времени",
+    //         date: "02/12/2024",
+    //     },
+    // ];
+    // const INITIAL_DATA = [
+    //     {
+    //         id: 1,
+    //         title: 'Подготовка к обновлению курсов',
+    //         post: 'Горные походы открывают удивительные природные ландшафт',
+    //         date: new Date(),
+    //     },
+    //     {
+    //         id: 2,
+    //         title: 'Поход в годы',
+    //         post: 'Думал, что очень много времени',
+    //         date: new Date(),
+    //     },
+    // ];
+    // const [items, setItems] = useState(INITIAL_DATA);
+    // const [items, setItems] = useState([]);
+
+    const [items, setItems] = useState(() => {
+        const data = JSON.parse(localStorage.getItem("data"));
+        return data
+            ? data.map(item => ({
+                  ...item,
+                  date: new Date(item.date),
+              }))
+            : [];
+    });
+
+    // const [items, setItems] = useState([]);
+
+    // useEffect(() => {
+    //     const data = JSON.parse(localStorage.getItem("data"));
+    //     if (data) {
+    //         setItems(
+    //             data.map(item => ({
+    //                 ...item,
+    //                 date: new Date(item.date),
+    //             })),
+    //         );
+    //     }
+    // }, []);
+
+    useEffect(() => {
+        if (items.length > 0) {
+            localStorage.setItem("data", JSON.stringify(items));
+        }
+    }, [items]);
 
     const addItem = item => {
         setItems(oldItems => [
@@ -41,23 +86,6 @@ function App() {
             },
         ]);
     };
-
-    // function sortItem(a, b) {
-    //     if (a.date < b.date) {
-    //         return 1;
-    //     } else {
-    //         return -1;
-    //     }
-    // }
-
-    // let list = <p>Записей пока нет, добавьте первую</p>;
-    // if (items.length > 0) {
-    //     list = items.sort(sortItem).map(item => (
-    //         <CardButton key={item.id}>
-    //             <JournalItem data={item} />
-    //         </CardButton>
-    //     ));
-    // }
 
     return (
         <div className="app">

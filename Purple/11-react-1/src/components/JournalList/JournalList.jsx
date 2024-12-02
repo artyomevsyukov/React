@@ -1,6 +1,6 @@
-import './JournalList.css';
-import CardButton from '../CardButton/CardButton';
-import JournalItem from '../JournalItem/JournalItem';
+import "./JournalList.css";
+import CardButton from "../CardButton/CardButton";
+import JournalItem from "../JournalItem/JournalItem";
 
 function JournalList({ items }) {
     if (items.length === 0) {

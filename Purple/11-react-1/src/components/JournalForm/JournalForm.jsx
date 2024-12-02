@@ -1,14 +1,16 @@
-import styles from './JournalForm.module.css';
-import Button from '../Button/Button';
-import { useState } from 'react';
-import classNames from 'classnames';
+import styles from "./JournalForm.module.css";
+import Button from "../Button/Button";
+import { useState } from "react";
+import classNames from "classnames";
 
 function JournalForm({ submit }) {
-    const [formValidateState, setFormValidateState] = useState({
+    const INITIAL_STATE = {
         title: true,
         post: true,
         date: true,
-    });
+    };
+
+    const [formValidateState, setFormValidateState] = useState(INITIAL_STATE);
 
     const addJournalItem = e => {
         e.preventDefault();
@@ -17,8 +19,8 @@ function JournalForm({ submit }) {
         console.log(formProps);
 
         let isFormValid = true;
-        console.log('formValidateState.date: ', formValidateState.date);
-        console.log('formProps.date: ', formProps.date);
+        console.log("formValidateState.date: ", formValidateState.date);
+        console.log("formProps.date: ", formProps.date);
         if (!formProps.title?.trim().length) {
             setFormValidateState(state => ({ ...state, title: false }));
             isFormValid = false;
@@ -46,19 +48,19 @@ function JournalForm({ submit }) {
 
     return (
         <>
-            <form className={styles['journal-form']} onSubmit={addJournalItem}>
+            <form className={styles["journal-form"]} onSubmit={addJournalItem}>
                 <div>
                     <input
                         type="text"
                         name="title"
                         // className={`${styles['input']} ${formValidateState.title ? '' : styles['invalid']}`}
-                        className={classNames(styles['input-title'], {
-                            [styles['invalid']]: !formValidateState.title,
+                        className={classNames(styles["input-title"], {
+                            [styles["invalid"]]: !formValidateState.title,
                         })}
                     />
                 </div>
-                <div className={styles['form-row']}>
-                    <label htmlFor="date" className={styles['form-label']}>
+                <div className={styles["form-row"]}>
+                    <label htmlFor="date" className={styles["form-label"]}>
                         <img src="/calendar.svg" alt="Иконка календаря" />
                         <span>Дата</span>
                     </label>
@@ -67,18 +69,18 @@ function JournalForm({ submit }) {
                         type="date"
                         name="date"
                         // className={`${styles['input']} ${formValidateState.date ? '' : styles['invalid']}`}
-                        className={classNames(styles['input'], {
-                            [styles['invalid']]: !formValidateState.date,
+                        className={classNames(styles["input"], {
+                            [styles["invalid"]]: !formValidateState.date,
                         })}
                     />
                 </div>
-                <div className={styles['form-row']}>
-                    <label htmlFor="tag" className={styles['form-label']}>
+                <div className={styles["form-row"]}>
+                    <label htmlFor="tag" className={styles["form-label"]}>
                         <img src="/folder.svg" alt="Иконка папки" />
                         <span>Метки</span>
                     </label>
                     <input
-                        className={styles['input']}
+                        className={styles["input"]}
                         type="text"
                         name="tag"
                         id="tag"
@@ -91,15 +93,15 @@ function JournalForm({ submit }) {
                     rows="10"
                     spellCheck="true"
                     // className={`${styles['input']} ${formValidateState.text ? '' : styles['invalid']}`}
-                    className={classNames(styles['input'], {
-                        [styles['invalid']]: !formValidateState.post,
+                    className={classNames(styles["input"], {
+                        [styles["invalid"]]: !formValidateState.post,
                     })}
                 ></textarea>
 
                 <Button
                     text="Сохранить"
                     type="submit"
-                    onClick={() => console.log('На нас нажали')}
+                    onClick={() => console.log("На нас нажали")}
                 />
             </form>
         </>
