@@ -1,6 +1,6 @@
 import styles from "./JournalForm.module.css";
 import Button from "../Button/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classNames from "classnames";
 
 function JournalForm({ submit }) {
@@ -12,15 +12,32 @@ function JournalForm({ submit }) {
 
     const [formValidateState, setFormValidateState] = useState(INITIAL_STATE);
 
+    useEffect(() => {
+        let timerID;
+        if (
+            !formValidateState.date ||
+            !formValidateState.post ||
+            !formValidateState.title
+        ) {
+            timerID = setTimeout(() => {
+                console.log("Очистка состояния");
+                setFormValidateState(INITIAL_STATE);
+            }, 2000);
+        }
+        return () => {
+            clearTimeout(timerID);
+        };
+    }, [formValidateState]);
+
     const addJournalItem = e => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const formProps = Object.fromEntries(formData);
-        console.log(formProps);
+        // console.log(formProps);
 
         let isFormValid = true;
-        console.log("formValidateState.date: ", formValidateState.date);
-        console.log("formProps.date: ", formProps.date);
+        // console.log("formValidateState.date: ", formValidateState.date);
+        // console.log("formProps.date: ", formProps.date);
         if (!formProps.title?.trim().length) {
             setFormValidateState(state => ({ ...state, title: false }));
             isFormValid = false;
@@ -101,7 +118,7 @@ function JournalForm({ submit }) {
                 <Button
                     text="Сохранить"
                     type="submit"
-                    onClick={() => console.log("На нас нажали")}
+                    // onClick={() => console.log("На нас нажали")}
                 />
             </form>
         </>
