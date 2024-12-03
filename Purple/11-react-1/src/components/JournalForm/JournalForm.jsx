@@ -1,7 +1,7 @@
 import styles from './JournalForm.module.css'
 import Button from '../Button/Button'
 import { useEffect, useState } from 'react'
-import classNames from 'classnames'
+import CN from 'classnames'
 
 function JournalForm({ submit }) {
     const INITIAL_STATE = {
@@ -71,7 +71,7 @@ function JournalForm({ submit }) {
                         type="text"
                         name="title"
                         // className={`${styles['input']} ${formValidateState.title ? '' : styles['invalid']}`}
-                        className={classNames(styles['input-title'], {
+                        className={CN(styles['input-title'], {
                             [styles['invalid']]: !formValidateState.title,
                         })}
                     />
@@ -86,7 +86,7 @@ function JournalForm({ submit }) {
                         type="date"
                         name="date"
                         // className={`${styles['input']} ${formValidateState.date ? '' : styles['invalid']}`}
-                        className={classNames(styles['input'], {
+                        className={CN(styles['input'], {
                             [styles['invalid']]: !formValidateState.date,
                         })}
                     />
@@ -110,7 +110,7 @@ function JournalForm({ submit }) {
                     rows="10"
                     spellCheck="true"
                     // className={`${styles['input']} ${formValidateState.text ? '' : styles['invalid']}`}
-                    className={classNames(styles['input'], {
+                    className={CN(styles['input'], {
                         [styles['invalid']]: !formValidateState.post,
                     })}
                 ></textarea>
