@@ -51,7 +51,7 @@ export default [
             // semi: ["error", "always", { omitLastInOneLineBlock: false }],
             // "comma-dangle": ["error", "never",], //висящая запятая
             // 'comma-dangle': ['error', 'always',], //висящая запятая
-            // quotes: ["error", "double"],
+            // quotes: ['error', 'double'],
             quotes: ['error', 'single'],
             'react/prop-types': [0],
             // 'react/prop-type': [0,],
