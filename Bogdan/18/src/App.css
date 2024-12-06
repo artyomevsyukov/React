@@ -1,0 +1,37 @@
+.App {
+  text-align: center;
+}
+
+button {
+  padding: 15px;
+  font-size: 30px;
+  border-radius: 5px;
+  border: 0;
+  margin: 20px;
+  cursor: pointer;
+}
+
+/* h1 {
+  font-size: 90px;
+  margin-top: 20px;
+} */
+
+.cards {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card {
+  width: 250px;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+  padding-bottom: 10px;
+}
+
+.card > img {
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+}
