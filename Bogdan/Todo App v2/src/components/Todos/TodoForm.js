@@ -1,11 +1,15 @@
-import { useState } from "react"
 import styles from "./TodoForm.module.css"
+import { useState } from "react"
+import { Button } from "../UI/Button"
 
 function TodoForm({ submit }) {
   const [inputValue, setInputValue] = useState("")
 
   function handleFormSubmit(event) {
     event.preventDefault()
+    if (!inputValue) {
+      return
+    }
     submit({ text: inputValue })
     setInputValue("")
   }
@@ -25,7 +29,9 @@ function TodoForm({ submit }) {
           type="text"
           placeholder="Enter new todo"
         />
-        <button type="submit">Submit</button>
+        <Button type="submit" title="Submit">
+          Submit
+        </Button>
       </form>
     </div>
   )
