@@ -1,0 +1,12 @@
+.coursesWrapper {
+  padding: 20px;
+  width: 40%;
+  margin: 0 auto;
+}
+
+.coursesItem {
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid lightgreen;
+  border-radius: 5px;
+}

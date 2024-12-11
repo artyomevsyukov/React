@@ -4,11 +4,8 @@ function Menu() {
   return (
     <>
       <nav>
-        <NavLink
-          // className={({ isActive }) => (isActive ? "activeLink" : "link")}
-          to="."
-          end>
-          Go to Home
+        <NavLink to="." end>
+          Home
         </NavLink>
         <NavLink
           // className={({ isActive }) => (isActive ? "activeLink" : "link")}
@@ -16,13 +13,10 @@ function Menu() {
           //   isActive ? { color: "green" } : {}
           // }
           to="contacts">
-          Go to Contacts
+          Contacts
         </NavLink>
-        <NavLink
-          // className={({ isActive }) => (isActive ? "activeLink" : "link")}
-          to="about">
-          Go to Contacts
-        </NavLink>
+        <NavLink to="about">About</NavLink>
+        <NavLink to="courses">Courses</NavLink>
       </nav>
     </>
   )
