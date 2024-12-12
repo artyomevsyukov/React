@@ -1,22 +1,22 @@
 export const courses = [
   {
     title: "React",
-    slug: "react",
-    id: 111,
+    slug: "freact",
+    id: 576,
   },
   {
     title: "Node.js",
-    slug: "node",
-    id: 222,
+    slug: "anode",
+    id: 234,
   },
   {
-    title: "TypeScript",
+    title: "ATypeScript",
     slug: "ts",
-    id: 333,
+    id: 658,
   },
   {
-    title: "JavaScript",
+    title: "ZJavaScript",
     slug: "js",
-    id: 444,
+    id: 123,
   },
 ]
