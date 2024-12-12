@@ -16,7 +16,9 @@ function Menu() {
           Contacts
         </NavLink>
         <NavLink to="about">About</NavLink>
-        <NavLink to="courses">Courses</NavLink>
+        <NavLink to="courses" end>
+          Courses
+        </NavLink>
       </nav>
     </>
   )

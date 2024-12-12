@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom"
-import { courses } from "../data/courses"
+import { courses } from "../../data/courses"
 import styles from "./Courses.module.css"
 
 function Courses() {
