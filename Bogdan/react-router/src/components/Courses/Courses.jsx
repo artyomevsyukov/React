@@ -4,22 +4,17 @@ import queryString from "query-string"
 import { courses } from "../../data/courses"
 import styles from "./Courses.module.css"
 
-// Функция для сортировки
-function compareCourses(a, b, search) {
-  if (a[search] > b[search]) return 1
-  if (a[search] === b[search]) return 0
-  if (a[search] < b[search]) return -1
-}
+// ME создать массив динамически
+const SORT_KEYS = ["title", "id", "slug"]
 
 function sortCourses(courses, key) {
-  if (!key) {
+  if (!key || SORT_KEYS.includes(key)) {
     return [...courses]
   }
   return [...courses].sort((a, b) => (a[key] > b[key] ? 1 : -1))
 }
 
 function Courses() {
-  const [title, setTitle] = useState("Courses")
   const navigate = useNavigate()
   const location = useLocation()
   const query = queryString.parse(location.search)
@@ -29,6 +24,13 @@ function Courses() {
   const [sortedCourses, setSortedCourses] = useState(
     sortCourses(courses, sortKey)
   )
+
+  // useEffect(() => {
+  //   if (!SORT_KEYS.includes(sortKey)) {
+  //     navigate(".")
+  //     // setSortKey()
+  //   }
+  // }, [sortKey, navigate])
 
   // useEffect(() => {
   //   // Проверяем, указан ли параметр sort
@@ -58,7 +60,6 @@ function Courses() {
   return (
     <div className={styles.coursesWrapper}>
       <h2>{sortKey ? `Courses sorted by ${sortKey}` : "Courses"}</h2>
-      {/* <h2>{title}</h2> */}
       {sortedCourses.map((course) => (
         <div className={styles.coursesItem} key={course.id}>
           <NavLink to={course.slug}>
