@@ -5,10 +5,15 @@ import { courses } from "../../data/courses"
 import styles from "./Courses.module.css"
 
 // ME создать массив динамически
-const SORT_KEYS = ["title", "id", "slug"]
+// const SORT_KEYS = ["title", "id", "slug"]
+function getUniqueSortKeys(arr) {
+  return Array.from(new Set(arr.flatMap((obj) => Object.keys(obj))))
+}
+const SORT_KEYS = getUniqueSortKeys(courses)
+console.log("SORT_KEYS: ", SORT_KEYS)
 
 function sortCourses(courses, key) {
-  if (!key || SORT_KEYS.includes(key)) {
+  if (!key || !SORT_KEYS.includes(key)) {
     return [...courses]
   }
   return [...courses].sort((a, b) => (a[key] > b[key] ? 1 : -1))
@@ -16,6 +21,7 @@ function sortCourses(courses, key) {
 
 function Courses() {
   const navigate = useNavigate()
+  console.log("navigate: ", navigate)
   const location = useLocation()
   const query = queryString.parse(location.search)
   const [sortKey, setSortKey] = useState(query.sort)
@@ -24,13 +30,16 @@ function Courses() {
   const [sortedCourses, setSortedCourses] = useState(
     sortCourses(courses, sortKey)
   )
+  console.log(courses)
+  console.log("sortedCourses: ", sortedCourses)
 
-  // useEffect(() => {
-  //   if (!SORT_KEYS.includes(sortKey)) {
-  //     navigate(".")
-  //     // setSortKey()
-  //   }
-  // }, [sortKey, navigate])
+  useEffect(() => {
+    if (!SORT_KEYS.includes(sortKey)) {
+      navigate(".") //Переходим к тому же компоненту в котором находимся
+      setSortKey()
+      // setSortedCourses([...courses]) //Возвращать в начальное состояние?
+    }
+  }, [sortKey, navigate])
 
   // useEffect(() => {
   //   // Проверяем, указан ли параметр sort
