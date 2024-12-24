@@ -25,6 +25,7 @@ function App() {
             <Route path="contacts" element={<Contacts />} />
             <Route path="courses" element={<Courses />} />
             <Route path="courses/:courseSlug" element={<SingleCouse />} />
+            {/*  courseSlug будет ключем в объекте useParams, а значением будет ссылка ссылка  <NavLink to={course.slug}>*/}
           </Route>
         </Routes>
       </div>

@@ -7,6 +7,7 @@ import styles from "./Courses.module.css"
 
 function SingleCouse() {
   const params = useParams()
+  // const { courseSlug } = useParams() // Получаем значение courseSlug из URL
   // console.log("params: ", params)
   const navigate = useNavigate()
   const course = courses.find((course) => course.slug === params.courseSlug)
@@ -41,6 +42,7 @@ function SingleCouse() {
       <Link to=".." relative="path">
         All Courses
       </Link>
+      {/*  relative="path" Перходим на один уровень выше текущего пути иначе перешли бы к '/' */}
     </div>
   )
 }
