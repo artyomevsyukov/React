@@ -2,8 +2,10 @@ import "./Filter.css"
 
 function Filter() {
   return (
-    <div className="app-block book-form">
-      <h2>Filters</h2>
+    <div className="app-block filter">
+      <div className="filter-group">
+        <input type="text" placeholder="Фльтр по названию" />
+      </div>
     </div>
   )
 }
