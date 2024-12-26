@@ -19,16 +19,18 @@ const filterSlice = createSlice({
       state.title = action.payload
       //так можно благодоря библиотеке immer
     },
+    setAuthorFilter: (state, action) => {
+      state.author = action.payload
+    },
     resetFilters: (state) => {
       return initialState
     },
   },
 })
 
-// console.log("filterSlice.actions: ", filterSlice.actions)
-// console.log(filterSlice.actions.setTitleFilter("test"))
-
-export const { setTitleFilter, resetFilters } = filterSlice.actions
+export const { setTitleFilter, resetFilters, setAuthorFilter } =
+  filterSlice.actions
 export const selectTitleFilter = (state) => state.filter.title
+export const selectAuthorFilter = (state) => state.filter.author
 
 export default filterSlice.reducer
