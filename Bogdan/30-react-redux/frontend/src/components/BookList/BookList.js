@@ -13,6 +13,7 @@ function BookList() {
   const titleFilter = useSelector(selectTitleFilter)
   const authorFilter = useSelector(selectAuthorFilter)
   const isFavoriteFilter = useSelector(selectFavoriteFilter)
+
   const filteredBooks = books.filter((book) => {
     const matchesTitle = book.title
       .toLowerCase()
@@ -20,7 +21,7 @@ function BookList() {
     const matchesAuthor = book.author
       .toLowerCase()
       .includes(authorFilter.toLowerCase())
-    const matchesIsFavorite = 
+    const matchesIsFavorite = isFavoriteFilter ? book.isFavorite : book
 
     // console.log({ title: book.title, matchesTitle })
     return matchesTitle && matchesAuthor && matchesIsFavorite

@@ -22,9 +22,12 @@ function Filter() {
   const handleAuthorFilterChange = (e) => {
     dispatch(setAuthorFilter(e.target.value))
   }
-  const handleFavoriteeCheckbox = (e) => {
-    dispatch(setFavoriteFilter(e.target.checked))
+  const handleFavoriteeCheckbox = () => {
+    dispatch(setFavoriteFilter())
   }
+  // const handleFavoriteeCheckbox = (e) => {
+  //   dispatch(setFavoriteFilter(e.target.checked))
+  // }
 
   const handleFilterReset = () => {
     dispatch(resetFilters())
@@ -51,11 +54,14 @@ function Filter() {
           />
         </div>
         <div className="filter-group">
-          <input
-            value={favoriteFilter}
-            type="checkbox"
-            onChange={handleFavoriteeCheckbox}
-          />
+          <label>
+            <input
+              checked={favoriteFilter}
+              type="checkbox"
+              onChange={handleFavoriteeCheckbox}
+            />
+            Only Favorite
+          </label>
         </div>
         <button type="button" onClick={handleFilterReset}>
           Reset Filters

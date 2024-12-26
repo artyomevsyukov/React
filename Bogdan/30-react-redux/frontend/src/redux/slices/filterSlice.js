@@ -22,13 +22,16 @@ const filterSlice = createSlice({
     setAuthorFilter: (state, action) => {
       state.author = action.payload
     },
-    resetFilters: (state) => {
+    resetFilters: () => {
       return initialState
     },
 
-    setFavoriteFilter: (state, action) => {
-      return { ...state, onlyFavorite: action.payload }
+    setFavoriteFilter: (state) => {
+      state.onlyFavorite = !state.onlyFavorite
     },
+    // setFavoriteFilter: (state, action) => {
+    //   return { ...state, onlyFavorite: action.payload }
+    // },
   },
 })
 
