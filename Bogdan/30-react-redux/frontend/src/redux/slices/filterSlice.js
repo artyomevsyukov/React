@@ -25,12 +25,21 @@ const filterSlice = createSlice({
     resetFilters: (state) => {
       return initialState
     },
+
+    setFavoriteFilter: (state, action) => {
+      return { ...state, onlyFavorite: action.payload }
+    },
   },
 })
 
-export const { setTitleFilter, resetFilters, setAuthorFilter } =
-  filterSlice.actions
+export const {
+  setTitleFilter,
+  resetFilters,
+  setAuthorFilter,
+  setFavoriteFilter,
+} = filterSlice.actions
 export const selectTitleFilter = (state) => state.filter.title
 export const selectAuthorFilter = (state) => state.filter.author
+export const selectFavoriteFilter = (state) => state.filter.onlyFavorite
 
 export default filterSlice.reducer
