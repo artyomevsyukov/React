@@ -4,7 +4,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import createBookWithId from "../../utils/createBookWithId"
 
 const initialState = []
-const API = "http://localhost:5000/random-book"
+const API = "http://localhost:4000/random-book"
 
 export const fetchBook = createAsyncThunk("books/fetchBook", async () => {
   const res = await axios.get(API)
