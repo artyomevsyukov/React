@@ -3,7 +3,11 @@ import "./BookForm.css"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 // import { addBook } from "../../redux/books/actionCreators"
-import { addBook, thunkFunction } from "../../redux/slices/booksSlice"
+import {
+  addBook,
+  // thunkFunction,
+  fetchBook,
+} from "../../redux/slices/booksSlice"
 import booksData from "../../data/books.json"
 import createBookWithId from "../../utils/createBookWithId"
 
@@ -43,7 +47,7 @@ function BookForm() {
   // }
 
   function handleAddRandomBookVaiApi() {
-    dispatch(thunkFunction)
+    dispatch(fetchBook())
   }
 
   return (
