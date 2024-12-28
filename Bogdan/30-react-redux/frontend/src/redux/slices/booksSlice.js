@@ -48,6 +48,7 @@ const booksSlice = createSlice({
       //   )
     },
   },
+
   extraReducers: (builder) => {
     builder.addCase(fetchBook.fulfilled, (state, action) => {
       // console.log("CALLED")
