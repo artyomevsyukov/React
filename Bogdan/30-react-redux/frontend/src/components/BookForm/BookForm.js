@@ -10,6 +10,7 @@ import {
 } from "../../redux/slices/booksSlice"
 import booksData from "../../data/books.json"
 import createBookWithId from "../../utils/createBookWithId"
+import { setError } from "../../redux/slices/errorSlice"
 
 function BookForm() {
   // const [formData, setFormData] = useState({})
@@ -25,6 +26,9 @@ function BookForm() {
       dispatch(addBook(createBookWithId({ title, author }, "manual")))
       setAuthor("")
       setTitle("")
+    } else {
+      dispatch(setError("Введите название и автора"))
+      // setTimeout(() => dispatch(clearError()), 100)
     }
   }
 

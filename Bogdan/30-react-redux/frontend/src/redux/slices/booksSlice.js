@@ -7,9 +7,12 @@ const initialState = []
 const API = "http://localhost:4000/random-book"
 
 export const fetchBook = createAsyncThunk("books/fetchBook", async () => {
-  const res = await axios.get(API)
-
-  return res.data
+  try {
+    const res = await axios.get(API)
+    return res.data
+  } catch (error) {
+    // todo
+  }
 })
 
 const booksSlice = createSlice({
@@ -48,8 +51,6 @@ const booksSlice = createSlice({
   },
 })
 
-export const { addBook, deleteBook, toggleFavorite } = booksSlice.actions
-
 // export async function thunkFunction(dispatch, getState) {
 //   // console.log(getState())
 
@@ -66,6 +67,7 @@ export const { addBook, deleteBook, toggleFavorite } = booksSlice.actions
 //   // console.log(getState())
 // }
 
+export const { addBook, deleteBook, toggleFavorite } = booksSlice.actions
 export const selectBooks = (state) => state.books
 
 export default booksSlice.reducer
