@@ -25,9 +25,6 @@ function Filter() {
   const handleFavoriteeCheckbox = () => {
     dispatch(setFavoriteFilter())
   }
-  // const handleFavoriteeCheckbox = (e) => {
-  //   dispatch(setFavoriteFilter(e.target.checked))
-  // }
 
   const handleFilterReset = () => {
     dispatch(resetFilters())

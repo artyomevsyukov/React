@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux"
-// import { deleteBook, toggleFavorite } from "../../redux/books/actionCreators"
 import {
   deleteBook,
   toggleFavorite,
@@ -83,8 +82,6 @@ function BookList() {
                     <BsBookmarkStar className="star-icon" />
                   )}
                 </span>
-                {/* <BsBookmarkStar />
-                <BsBookmarkStarFill /> */}
                 <button onClick={() => handleDeleteBook(book.id)}>
                   Delete
                 </button>

@@ -2,10 +2,10 @@ import "./BookForm.css"
 // import axios from "axios"
 
 import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { FaSpinner } from "react-icons/fa"
-// import { addBook } from "../../redux/books/actionCreators"
 import {
+  selectIsLoadingViaAPI,
   addBook,
   // thunkFunction,
   fetchBook,
@@ -20,7 +20,8 @@ function BookForm() {
   const API_DELAY = "http://localhost:4000/random-book-delay"
   const [author, setAuthor] = useState("")
   const [title, setTitle] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
+  // const [isLoading, setIsLoading] = useState(false)
+  const isLoadingViaAPI = useSelector(selectIsLoadingViaAPI)
   const dispatch = useDispatch()
 
   function handleSubmit(e) {
@@ -42,26 +43,9 @@ function BookForm() {
     dispatch(addBook(createBookWithId(randomBook, "random")))
   }
 
-  // async function handleAddRandomBookVaiApi() {
-  //   try {
-  //     const res = await fetch(API)
-  //     const data = await res.json()
-  //     if (data && data.title && data.author) {
-  //       dispatch(addBook(createBookWithId(data)))
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching random book", error)
-  //   }
-  // }
-
-  async function handleAddRandomBookVaiApi() {
+  function handleAddRandomBookVaiApi() {
     // dispatch(fetchBook(API))
-    try {
-      setIsLoading(true)
-      await dispatch(fetchBook(API_DELAY))
-    } finally {
-      setIsLoading(false)
-    }
+    dispatch(fetchBook(API_DELAY))
   }
 
   return (
@@ -93,10 +77,11 @@ function BookForm() {
           Random Book
         </button>
         <button
+          className="randomBook"
           type="button"
           onClick={handleAddRandomBookVaiApi}
-          disabled={isLoading}>
-          {isLoading ? (
+          disabled={isLoadingViaAPI}>
+          {isLoadingViaAPI ? (
             <>
               <span>Loading Book...</span>
               <FaSpinner className="spinner" />
