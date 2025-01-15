@@ -11,9 +11,24 @@ function JournalForm({ submit }) {
     const dateRef = useRef()
     const postRef = useRef()
 
+    function focusError(isValid) {
+        switch (true) {
+            case !isValid.title:
+                titleRef.current.focus()
+                break
+            case !isValid.date:
+                dateRef.current.focus()
+                break
+            case !isValid.post:
+                postRef.current.focus()
+                break
+        }
+    }
+
     useEffect(() => {
         let timerID
         if (!isValid.date || !isValid.post || !isValid.title) {
+            focusError(isValid)
             timerID = setTimeout(() => {
                 dispatchForm({ type: 'RESET_VALIDITY' })
             }, 2000)
