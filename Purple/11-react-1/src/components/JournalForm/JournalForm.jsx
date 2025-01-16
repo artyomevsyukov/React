@@ -3,6 +3,7 @@ import Button from '../Button/Button'
 import { useEffect, useReducer, useRef } from 'react'
 import CN from 'classnames'
 import { INITIAL_STATE, formReducer } from './JournalFrom.state'
+import Input from '../Input/Input'
 
 function JournalForm({ submit }) {
     const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE)
@@ -61,16 +62,15 @@ function JournalForm({ submit }) {
         <>
             <form className={styles['journal-form']} onSubmit={addJournalItem}>
                 <div>
-                    <input
-                        onChange={onChange}
+                    <Input
                         type="text"
+                        ref={titleRef}
+                        onChange={onChange}
                         name="title"
                         value={values.title}
-                        ref={titleRef}
+                        appearance="title"
+                        isValid={isValid.title}
                         // className={`${styles['input']} ${formValidateState.title ? '' : styles['invalid']}`}
-                        className={CN(styles['input-title'], {
-                            [styles['invalid']]: !isValid.title,
-                        })}
                     />
                 </div>
                 <div className={styles['form-row']}>
@@ -78,17 +78,15 @@ function JournalForm({ submit }) {
                         <img src="/calendar.svg" alt="Иконка календаря" />
                         <span>Дата</span>
                     </label>
-                    <input
+                    <Input
                         onChange={onChange}
                         id="date"
                         type="date"
                         name="date"
                         value={values.date}
                         ref={dateRef}
+                        isValid={isValid.date}
                         // className={`${styles['input']} ${formValidateState.date ? '' : styles['invalid']}`}
-                        className={CN(styles['input'], {
-                            [styles['invalid']]: !isValid.date,
-                        })}
                     />
                 </div>
                 <div className={styles['form-row']}>
@@ -96,7 +94,7 @@ function JournalForm({ submit }) {
                         <img src="/folder.svg" alt="Иконка папки" />
                         <span>Метки</span>
                     </label>
-                    <input
+                    <Input
                         className={styles['input']}
                         type="text"
                         name="tag"
