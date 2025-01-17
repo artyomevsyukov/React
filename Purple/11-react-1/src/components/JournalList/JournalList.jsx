@@ -16,11 +16,14 @@ function JournalList({ items }) {
 
     return (
         <div className="lournal-list">
-            {items.sort(sortItem).map(item => (
-                <CardButton key={item.id}>
-                    <JournalItem data={item} />
-                </CardButton>
-            ))}
+            {items
+                // .filter(userId => userId === UserContext.userId)
+                .sort(sortItem)
+                .map(item => (
+                    <CardButton key={item.id}>
+                        <JournalItem data={item} />
+                    </CardButton>
+                ))}
         </div>
     )
 
