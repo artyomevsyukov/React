@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import Button from '../Button/Button'
 import SelectUser from '../SelectUser/SelectUser'
 // import styles from './Header.module.css'
@@ -11,9 +11,9 @@ function Header() {
 
     const [logoIndex, setLogoIndex] = useState(0)
 
-    const toggleLogo = () => {
+    const toggleLogo = useCallback(() => {
         setLogoIndex(state => Number(!state))
-    }
+    }, [])
     return (
         <>
             <Logo image={logos[logoIndex]} />
