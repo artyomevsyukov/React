@@ -1,11 +1,11 @@
-import "./Button.css";
+import './Button.css'
 
-function Button({ text, onClick, type = "button" }) {
+function Button({ children, onClick, type = 'button' }) {
     return (
         <button className="button accent" type={type} onClick={onClick}>
-            {text}
+            {children}
         </button>
-    );
+    )
 }
 
-export default Button;
+export default Button

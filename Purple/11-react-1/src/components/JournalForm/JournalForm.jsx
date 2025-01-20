@@ -129,10 +129,11 @@ function JournalForm({ submit }) {
                 ></textarea>
 
                 <Button
-                    text="Сохранить"
                     type="submit"
                     // onClick={() => console.log("На нас нажали")}
-                />
+                >
+                    Сохранить
+                </Button>
             </form>
         </>
     )
