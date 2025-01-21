@@ -45,8 +45,9 @@ function JournalForm({ submit }) {
         if (isFormReadyToSubmit) {
             submit(values)
             dispatchForm({ type: 'CLEAR' })
+            dispatchForm({ type: 'SET_VALUE', payload: { userId } })
         }
-    }, [isFormReadyToSubmit, values, submit])
+    }, [isFormReadyToSubmit, values, submit, userId])
 
     useEffect(() => {
         dispatchForm({

@@ -6,14 +6,7 @@ import { UserContext } from '../../context/user.context'
 
 function JournalList({ items }) {
     const { userId } = useContext(UserContext)
-    const sorteredItems = useMemo(
-        () => items.filter(el => el.userId === userId).sort(sortItem),
-        [items, userId],
-    )
 
-    if (items.length === 0) {
-        return <p>Записей пока нет, добавьте первую</p>
-    }
     function sortItem(a, b) {
         if (a.date < b.date) {
             return 1
@@ -22,14 +15,25 @@ function JournalList({ items }) {
         }
     }
 
+    const filteredItems = useMemo(
+        () => items.filter(el => el.userId === userId).sort(sortItem),
+        [items, userId],
+    )
+
+    if (items.length === 0) {
+        return <p>Записей пока нет, добавьте первую</p>
+    }
+
     return (
-        <div className="lournal-list">
-            {sorteredItems.map(item => (
-                <CardButton key={item.id}>
+        // <div className="lournal-list">
+        <>
+            {filteredItems.map(item => (
+                <CardButton key={item.id} onClick={() => setItem(el)}>
                     <JournalItem data={item} />
                 </CardButton>
             ))}
-        </div>
+        </>
+        // </div>
     )
 
     // return <div className="lournal-list">{items}</div>;

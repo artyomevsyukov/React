@@ -19,7 +19,6 @@ function mapItems(items) {
 }
 
 function App() {
-    console.log('app')
     const [items, setItems] = useLocalStorage('data')
 
     const addItem = item => {

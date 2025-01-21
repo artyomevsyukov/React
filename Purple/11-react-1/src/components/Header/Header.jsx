@@ -7,18 +7,17 @@ import Logo from '../Logo/Logo'
 const logos = ['/logo.svg', '/vite.svg']
 
 function Header() {
-    console.log('header')
+    // const [logoIndex, setLogoIndex] = useState(0)
 
-    const [logoIndex, setLogoIndex] = useState(0)
-
-    const toggleLogo = useCallback(() => {
-        setLogoIndex(state => Number(!state))
-    }, [])
+    // const toggleLogo = useCallback(() => {
+    //     setLogoIndex(state => Number(!state))
+    // }, [])
     return (
         <>
-            <Logo image={logos[logoIndex]} />
+            {/* <Logo image={logos[logoIndex]} /> */}
+            <Logo image={logos[0]} />
             <SelectUser />
-            <Button onClick={toggleLogo}>Сменить лого</Button>
+            {/* <Button onClick={toggleLogo}>Сменить лого</Button> */}
         </>
     )
 }
