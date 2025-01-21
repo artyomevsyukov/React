@@ -4,7 +4,7 @@ import JournalItem from '../JournalItem/JournalItem'
 import { useContext, useMemo } from 'react'
 import { UserContext } from '../../context/user.context'
 
-function JournalList({ items }) {
+function JournalList({ items, setItem }) {
     const { userId } = useContext(UserContext)
 
     function sortItem(a, b) {

@@ -1,5 +1,5 @@
-import CardButton from '../CardButton/CardButton';
-import './JournalAddButton.css';
+import CardButton from '../CardButton/CardButton'
+import './JournalAddButton.css'
 
 function JournalAddButton() {
     return (
@@ -25,10 +25,10 @@ function JournalAddButton() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                 />
-            </svg>{' '}
+            </svg>
             Новое воспоминание
         </CardButton>
-    );
+    )
 }
 
-export default JournalAddButton;
+export default JournalAddButton
