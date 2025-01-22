@@ -6,7 +6,7 @@ import { INITIAL_STATE, formReducer } from './JournalFrom.state'
 import Input from '../Input/Input'
 import { UserContext } from '../../context/user.context'
 
-function JournalForm({ submit, data }) {
+function JournalForm({ submit, data, onDelete }) {
     const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE)
     const { isValid, values, isFormReadyToSubmit } = formState
     const titleRef = useRef()
@@ -29,10 +29,21 @@ function JournalForm({ submit, data }) {
     }
 
     useEffect(() => {
-        if (data) {
-            dispatchForm({ type: 'SET_VALUE', payload: { ...data } })
+        if (!data) {
+            dispatchForm({ type: 'CLEAR' })
+            dispatchForm({ type: 'SET_VALUE', payload: { userId } })
         }
-    }, [data])
+        // if (data) {
+        //     dispatchForm({ type: 'SET_VALUE', payload: { ...data } })
+        // }
+        dispatchForm({ type: 'SET_VALUE', payload: { ...data } })
+    }, [data, userId])
+
+    useEffect(() => {
+        dispatchForm({ type: 'CLEAR' })
+        dispatchForm({ type: 'SET_VALUE', payload: { userId } })
+        // data.id = ''
+    }, [userId])
 
     useEffect(() => {
         let timerID
@@ -72,23 +83,40 @@ function JournalForm({ submit, data }) {
     const addJournalItem = e => {
         e.preventDefault()
         dispatchForm({ type: 'SUBMIT' })
+        // data.id = ''
+    }
+
+    const deleteJournalItem = () => {
+        onDelete(data.id)
+        dispatchForm({ type: 'CLEAR' })
+        dispatchForm({ type: 'SET_VALUE', payload: { userId } })
+        data.id = ''
     }
 
     return (
         <>
             <form className={styles['journal-form']} onSubmit={addJournalItem}>
                 {/* {userId} */}
-                <div>
+                <div className={styles['form-row']}>
                     <Input
+                        appearance="title"
                         type="text"
                         ref={titleRef}
                         onChange={onChange}
                         name="title"
                         value={values.title}
-                        appearance="title"
                         isValid={isValid.title}
                         // className={`${styles['input']} ${formValidateState.title ? '' : styles['invalid']}`}
                     />
+                    {data?.id && (
+                        <button
+                            type="button"
+                            className={styles['delete']}
+                            onClick={deleteJournalItem}
+                        >
+                            <img src="/archive.svg" alt="Иконка удаления" />
+                        </button>
+                    )}
                 </div>
                 <div className={styles['form-row']}>
                     <label htmlFor="date" className={styles['form-label']}>

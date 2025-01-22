@@ -21,7 +21,7 @@ function mapItems(items) {
 
 function App() {
     const [items, setItems] = useLocalStorage('data')
-    const [selectedItem, setSelectedItem] = useState({})
+    const [selectedItem, setSelectedItem] = useState(null)
     console.log('selectedItem: ', selectedItem)
 
     const addItem = item => {
@@ -51,20 +51,27 @@ function App() {
             ])
         }
     }
+    const deleteItem = id => {
+        setItems([...items.filter(i => i.id !== id)])
+    }
 
     return (
         <UserContextProvider>
             <div className="app">
                 <LeftPanel>
                     <Header />
-                    <JournalAddButton />
+                    <JournalAddButton clearForm={() => setSelectedItem(null)} />
                     <JournalList
                         items={mapItems(items)}
                         setItem={setSelectedItem}
                     />
                 </LeftPanel>
                 <Body>
-                    <JournalForm submit={addItem} data={selectedItem} />
+                    <JournalForm
+                        submit={addItem}
+                        data={selectedItem}
+                        onDelete={deleteItem}
+                    />
                 </Body>
             </div>
         </UserContextProvider>
