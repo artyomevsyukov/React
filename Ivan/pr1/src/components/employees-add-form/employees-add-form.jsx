@@ -1,30 +1,3 @@
-// import "./employees-add-form.css"
-
-// const EmployeesAddForm = () => {
-//   return (
-//     <div className="app-add-form">
-//       <h3>Добавьте нового сотрудника</h3>
-//       <form className="add-form d-flex">
-//         <input
-//           type="text"
-//           className="form-control new-post-label"
-//           placeholder="Как его зовут?"
-//         />
-//         <input
-//           type="number"
-//           className="form-control new-post-label"
-//           placeholder="З/П в $?"
-//         />
-
-//         <button type="submit" className="btn btn-outline-light">
-//           Добавить
-//         </button>
-//       </form>
-//     </div>
-//   )
-// }
-
-// export default EmployeesAddForm
 import "./employees-add-form.css"
 import { Component } from "react"
 
@@ -38,8 +11,16 @@ class EmployeesAddForm extends Component {
   }
 
   onValueChange = (e) => {
-    console.log(e.target.value)
     this.setState({ [e.target.name]: [e.target.value] })
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault()
+    this.props.onAddUser(this.state.name, this.state.salary)
+    this.setState({
+      name: "",
+      salary: "",
+    })
   }
 
   render() {
@@ -48,7 +29,7 @@ class EmployeesAddForm extends Component {
     return (
       <div className="app-add-form">
         <h3>Добавьте нового сотрудника</h3>
-        <form className="add-form d-flex">
+        <form className="add-form d-flex" onSubmit={this.onSubmit}>
           <input
             onChange={this.onValueChange}
             type="text"
@@ -65,7 +46,6 @@ class EmployeesAddForm extends Component {
             className="form-control new-post-label"
             placeholder="З/П в $?"
           />
-
           <button type="submit" className="btn btn-outline-light">
             Добавить
           </button>
