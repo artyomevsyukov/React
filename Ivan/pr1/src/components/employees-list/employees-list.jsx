@@ -1,7 +1,7 @@
 import "./employees-list.css"
 import EmployeesListItem from "../employees-list-item/employees-list-item"
 
-function EmployeesList({ data, onDelete }) {
+function EmployeesList({ data, onDelete, onToggleIncrease, onToggleRise }) {
   // function sortItem(a, b) {
   //   if (a.salary > b.salary) {
   //     return 1
@@ -21,6 +21,8 @@ function EmployeesList({ data, onDelete }) {
         key={id}
         {...itemProps}
         onDelete={() => onDelete(id)}
+        onToggleIncrease={() => onToggleIncrease(id)}
+        onToggleRise={() => onToggleRise(id)}
       />
     )
   })
