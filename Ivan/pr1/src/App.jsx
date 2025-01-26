@@ -12,6 +12,7 @@ class App extends Component {
     super(props)
     this.state = {
       data: [
+        { name: "Liza D.", salary: 600, increase: false, rise: false, id: 5 },
         { name: "Masha N.", salary: 1800, increase: false, rise: false, id: 4 },
         { name: "Dasha K.", salary: 800, increase: false, rise: false, id: 1 },
         {
@@ -53,17 +54,6 @@ class App extends Component {
     })
   }
 
-  // onToggleIncrease = (id) => {
-  //   this.setState(({ data }) => {
-  //     data: data.map((item) => {
-  //       if (item.id === id) {
-  //         item.increase: !increase
-  //         return {...data, item}
-  //       }
-  //       return item
-  //     })
-  //   })
-  // }
   onToggleIncrease = (id) => {
     this.setState(({ data }) => ({
       data: data.map((item) => {
@@ -76,13 +66,28 @@ class App extends Component {
   }
 
   onToggleRise = (id) => {
-    console.log(`Rise ${id}`)
+    this.setState(({ data }) => ({
+      data: data.map((item) => {
+        if (item.id === id) {
+          return { ...item, rise: !item.rise }
+        }
+        return item
+      }),
+    }))
   }
 
   render() {
+    const quantityEmployees = this.state.data.length
+    const quantityEmployeesWithBonus = this.state.data.filter(
+      (item) => item.increase
+    ).length
+
     return (
       <div className="app">
-        <AppInfo />
+        <AppInfo
+          quantityEmployees={quantityEmployees}
+          quantityEmployeesWithBonus={quantityEmployeesWithBonus}
+        />
 
         <div className="search-panel">
           <SearchPanel />
