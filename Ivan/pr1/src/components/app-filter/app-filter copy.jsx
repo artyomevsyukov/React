@@ -24,30 +24,16 @@ class AppFilter extends Component {
     })
   }
 
-  onValueRiseChange = () => {
+  onValueChange = () => {
     let rise = !this.state.rise
     this.setState({ rise })
     console.log(rise)
     this.props.onUpdateRise(rise)
   }
-  onValueSalaryChange = () => {
-    let salary = !this.state.salary
-    this.setState({ salary })
-    console.log(salary)
-    this.props.onUpdateSalary(salary)
-  }
 
   handleRiseClick = () => {
     this.toggleFilter("rise")
-    this.onValueRiseChange()
-  }
-  handleSalaryClick = () => {
-    this.toggleFilter("salary")
-    this.onValueSalaryChange()
-  }
-  handleALLEmployeesClick = () => {
-    this.setState({ activeFilters: [], rise: false, salary: false })
-    this.props.onUpdateState({ rise: false, salary: false })
+    this.onValueChange()
   }
 
   render() {
@@ -62,10 +48,7 @@ class AppFilter extends Component {
             "btn-outline-light": activeFilters.length > 0,
           })}
           type="button"
-          // onClick={() =>
-          //   this.setState({ activeFilters: [], rise: false, salary: false })
-          // } // Сброс всех фильтров
-          onClick={this.handleALLEmployeesClick} // Сброс всех фильтров
+          onClick={() => this.setState({ activeFilters: [] })} // Сброс всех фильтров
         >
           Все сотрудники
         </button>
@@ -89,7 +72,7 @@ class AppFilter extends Component {
             "btn-outline-light": !activeFilters.includes("salary"),
           })}
           type="button"
-          onClick={this.handleSalaryClick} // Переключение фильтра "salary"
+          onClick={() => this.toggleFilter("salary")} // Переключение фильтра "salary"
         >
           З/П больше 1000$
         </button>

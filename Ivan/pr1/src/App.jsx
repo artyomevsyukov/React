@@ -31,6 +31,8 @@ class App extends Component {
         },
       ],
       term: "",
+      rise: false,
+      salary: false,
     }
   }
 
@@ -98,13 +100,35 @@ class App extends Component {
     this.setState({ term })
   }
 
+  filterRise(rise) {
+    if (!rise) {
+      return
+    }
+    return this.state.data.filter((item) => item.rise)
+  }
+
+  onUpdateRise = (rise) => {
+    this.setState({ rise })
+  }
+  onUpdateSalary = (salary) => {
+    this.setState({ salary })
+  }
+  onUpdateState = (rise, salary) => {
+    this.setState(rise, salary)
+  }
+
   render() {
-    const { data, term } = this.state
+    const { data, term, rise, salary } = this.state
     const quantityEmployees = data.length
     const quantityEmployeesWithBonus = data.filter(
       (item) => item.increase
     ).length
-    const visibleData = this.searchEmp(data, term)
+    if (salary) {
+      console.log("Change Salsry")
+    }
+
+    const visibleDataRise = this.filterRise(rise)
+    const visibleData = this.searchEmp(rise ? visibleDataRise : data, term)
 
     return (
       <div className="app">
@@ -115,7 +139,11 @@ class App extends Component {
 
         <div className="search-panel">
           <SearchPanel onUpdateSearch={this.onUpdateSearch} />
-          <AppFilter />
+          <AppFilter
+            onUpdateRise={this.onUpdateRise}
+            onUpdateSalary={this.onUpdateSalary}
+            onUpdateState={this.onUpdateState}
+          />
         </div>
 
         <EmployeesList

@@ -7,20 +7,15 @@ class SearchPanel extends Component {
     this.state = {
       term: "",
     }
-    console.log("props: ", props)
-    // this.onUpdateSearch = props
   }
 
   onValueChange = (e) => {
     const term = e.target.value
     this.setState({ term })
     this.props.onUpdateSearch(term)
-    // this.setState({ term: e.target.value })
   }
 
   render() {
-    // this.onUpdateSearch(this.state.term)
-
     return (
       <input
         type="text"
