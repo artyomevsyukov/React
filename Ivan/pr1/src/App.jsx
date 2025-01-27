@@ -100,21 +100,40 @@ class App extends Component {
     this.setState({ term })
   }
 
-  filterRise(rise) {
-    if (!rise) {
-      return
-    }
-    return this.state.data.filter((item) => item.rise)
-  }
+  // filterRise(rise) {
+  //   if (!rise) {
+  //     return
+  //   }
+  //   return this.state.data.filter((item) => item.rise)
+  // }
+  // onUpdateRise = (rise) => {
+  //   this.setState({ rise })
+  // }
+  // onUpdateSalary = (salary) => {
+  //   this.setState({ salary })
+  // }
+  // onUpdateState = (rise, salary) => {
+  //   this.setState(rise, salary)
+  // }
 
-  onUpdateRise = (rise) => {
-    this.setState({ rise })
-  }
-  onUpdateSalary = (salary) => {
-    this.setState({ salary })
-  }
-  onUpdateState = (rise, salary) => {
-    this.setState(rise, salary)
+  filterData = (items, filters) => {
+    const { rise, salary } = filters
+
+    return items.filter((item) => {
+      let isMatch = true
+
+      // Фильтр по "rise"
+      if (rise) {
+        isMatch = isMatch && item.rise
+      }
+
+      // Фильтр по "salary"
+      if (salary) {
+        isMatch = isMatch && item.salary > 1000 // Условие для зарплаты больше 1000$
+      }
+
+      return isMatch
+    })
   }
 
   render() {
@@ -123,12 +142,12 @@ class App extends Component {
     const quantityEmployeesWithBonus = data.filter(
       (item) => item.increase
     ).length
-    if (salary) {
-      console.log("Change Salsry")
-    }
 
-    const visibleDataRise = this.filterRise(rise)
-    const visibleData = this.searchEmp(rise ? visibleDataRise : data, term)
+    // Фильтруем данные на основе активных фильтров
+    const filteredData = this.filterData(data, { rise, salary })
+
+    // Применяем поиск к отфильтрованным данным
+    const visibleData = this.searchEmp(filteredData, term)
 
     return (
       <div className="app">
@@ -140,8 +159,8 @@ class App extends Component {
         <div className="search-panel">
           <SearchPanel onUpdateSearch={this.onUpdateSearch} />
           <AppFilter
-            onUpdateRise={this.onUpdateRise}
-            onUpdateSalary={this.onUpdateSalary}
+            onUpdateRise={(rise) => this.setState({ rise })}
+            onUpdateSalary={(salary) => this.setState({ salary })}
             onUpdateState={this.onUpdateState}
           />
         </div>
