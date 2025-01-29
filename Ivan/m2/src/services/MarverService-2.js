@@ -79,6 +79,11 @@ class MarvelService2 {
     // return this.getResource("characters")
     // return this.getResource("Characters", this.params)
   }
+  getCharacter = (id) => {
+    return this.getResource(`characters/${id}`, { limit: 9, offset: 210 })
+    // return this.getResource("characters")
+    // return this.getResource("Characters", this.params)
+  }
 }
 
 export default MarvelService2

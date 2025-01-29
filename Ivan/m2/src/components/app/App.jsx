@@ -15,7 +15,7 @@ const App = () => {
 
   // Универсальный обработчик кликов
   const fetchData = useCallback(
-    (method) => {
+    (method, id = "") => {
       // console.log("📌 Вызван fetchData с методом:", method)
 
       // if (typeof marvelService[method] !== "function") {
@@ -23,8 +23,8 @@ const App = () => {
       //   return
       // }
 
-      marvelService[method]()
-        .then((data) => console.log("✅ Данные получены:", data))
+      marvelService[method](id)
+        .then((res) => console.log("✅ Данные получены:", res.data.results))
         .catch((err) => console.error("❌ Ошибка запроса:", err))
     },
     [marvelService]
