@@ -1,22 +1,13 @@
 import "./appHeader.scss"
-import { useCallback } from "react"
-import MarvelService2 from "../../services/MarverService-2"
 
-const AppHeader = () => {
-  const marvelService = new MarvelService2()
-
-  // Универсальный обработчик кликов
-  const fetchData = useCallback((method) => {
-    marvelService[method]()
-      .then((data) => console.log(data))
-      .catch((err) => console.error(err))
-  }, [])
-
+const AppHeader = ({ fetchData }) => {
   // Массив ссылок
   const links = [
     { name: "Characters", method: "getAllCharacters" },
     { name: "Comics", method: "getAllComics" },
   ]
+
+  // console.log("fetchData в AppHeader:", fetchData)
 
   return (
     <header className="app__header">

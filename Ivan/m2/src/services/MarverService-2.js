@@ -75,7 +75,7 @@ class MarvelService2 {
     // return this.getResource("comics", this.params)
   }
   getAllCharacters = () => {
-    return this.getResource("characters", { limit: 20 })
+    return this.getResource("characters", { limit: 9, offset: 210 })
     // return this.getResource("characters")
     // return this.getResource("Characters", this.params)
   }
