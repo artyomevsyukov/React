@@ -3,6 +3,7 @@ import mjolnir from "../../resources/img/mjolnir.png"
 import { Component } from "react"
 import MarvelService from "../../services/MarverService"
 import Spinner from "../spinner/Spinner"
+import ErrorMessage from "../errorMessage/ErrorMessage"
 
 class RandomChar extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class RandomChar extends Component {
   state = {
     char: {},
     loading: true,
+    error: false,
   }
 
   marvelService = new MarvelService()
@@ -21,11 +23,19 @@ class RandomChar extends Component {
     // console.log("char: ", char)
     this.setState({ char: char, loading: false })
   }
+
+  onError = () => {
+    this.setState({ loading: false, error: true })
+  }
+
   updateChar = () => {
     // 1011284  - 404
     // const id = 1011284
     const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000)
-    this.marvelService.getCharacter(id).then(this.onCharLoaded)
+    this.marvelService
+      .getCharacter(id)
+      .then(this.onCharLoaded)
+      .catch(this.onError)
   }
 
   View = ({ char }) => {
@@ -58,11 +68,16 @@ class RandomChar extends Component {
   }
 
   render() {
-    const { char, loading } = this.state
+    const { char, loading, error } = this.state
+    const errorMessage = error ? <ErrorMessage /> : null
+    const spinner = loading ? <Spinner /> : null
+    const content = !(loading || error) ? <this.View char={char} /> : null
 
     return (
       <div className="randomchar">
-        {loading ? <Spinner /> : <this.View char={char} />}
+        {errorMessage}
+        {spinner}
+        {content}
         <div className="randomchar__static">
           <p className="randomchar__title">
             Random character for today!
