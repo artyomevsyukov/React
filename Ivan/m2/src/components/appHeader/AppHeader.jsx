@@ -1,15 +1,6 @@
 import "./appHeader.scss"
 
-const AppHeader = ({ fetchData }) => {
-  // Массив ссылок
-  const links = [
-    { name: "Character-1", method: "getCharacter", id: 1011052 },
-    { name: "Characters", method: "getAllCharacters" },
-    { name: "Comics", method: "getAllComics" },
-  ]
-
-  // console.log("fetchData в AppHeader:", fetchData)
-
+const AppHeader = () => {
   return (
     <header className="app__header">
       <h1 className="app__title">
@@ -19,13 +10,13 @@ const AppHeader = ({ fetchData }) => {
       </h1>
       <nav className="app__menu">
         <ul>
-          {links.map(({ name, method, id }) => (
-            <li key={name}>
-              <a href="#" onClick={() => fetchData(method, id)}>
-                {name}
-              </a>
-            </li>
-          ))}
+          <li>
+            <a href="#">Characters</a>
+          </li>
+          /
+          <li>
+            <a href="#">Comics</a>
+          </li>
         </ul>
       </nav>
     </header>
