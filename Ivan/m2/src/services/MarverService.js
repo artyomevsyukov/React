@@ -75,6 +75,7 @@ class MarvelService {
 
   getCharacter = async (id) => {
     const res = await this.getResource(`characters/${id}`)
+
     return this._transformCharacter(res.data.results[0])
   }
 

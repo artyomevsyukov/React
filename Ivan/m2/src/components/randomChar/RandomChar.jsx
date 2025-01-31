@@ -52,7 +52,7 @@ class RandomChar extends Component {
     const { char, loading, error } = this.state
     const errorMessage = error ? <ErrorMessage /> : null
     const spinner = loading ? <Spinner /> : null
-    const content = !(loading || error) ? <this.View char={char} /> : null
+    const content = !(loading || error) ? <View char={char} /> : null
 
     return (
       <div className="randomchar">
@@ -74,41 +74,41 @@ class RandomChar extends Component {
       </div>
     )
   }
+}
 
-  View = ({ char }) => {
-    const { name, description, thumbnail, homepage, wiki } = char
-    const checkDescription = description
-      ? description
-      : "Для этого персонажа описания нет"
+const View = ({ char }) => {
+  const { name, description, thumbnail, homepage, wiki } = char
+  const checkDescription = description
+    ? description
+    : "Для этого персонажа описания нет"
 
-    return (
-      <div className="randomchar__block">
-        <img
-          src={thumbnail}
-          alt="Random character"
-          className="randomchar__img"
-          // className={`randomchar__img ${
-          //   char.isImageUnavailable ? "randomchar__img--fill" : ""
-          // }`}
-          style={{
-            objectFit: char.isImageUnavailable ? "contain" : "cover",
-          }}
-        />
-        <div className="randomchar__info">
-          <p className="randomchar__name">{name}</p>
-          <p className="randomchar__descr">{checkDescription}</p>
-          <div className="randomchar__btns">
-            <a href={homepage} className="button button__main">
-              <div className="inner">homepage</div>
-            </a>
-            <a href={wiki} className="button button__secondary">
-              <div className="inner">Wiki</div>
-            </a>
-          </div>
+  return (
+    <div className="randomchar__block">
+      <img
+        src={thumbnail}
+        alt="Random character"
+        className="randomchar__img"
+        // className={`randomchar__img ${
+        //   char.isImageUnavailable ? "randomchar__img--fill" : ""
+        // }`}
+        style={{
+          objectFit: char.isImageUnavailable ? "contain" : "cover",
+        }}
+      />
+      <div className="randomchar__info">
+        <p className="randomchar__name">{name}</p>
+        <p className="randomchar__descr">{checkDescription}</p>
+        <div className="randomchar__btns">
+          <a href={homepage} className="button button__main">
+            <div className="inner">homepage</div>
+          </a>
+          <a href={wiki} className="button button__secondary">
+            <div className="inner">Wiki</div>
+          </a>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default RandomChar
