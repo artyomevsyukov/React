@@ -6,11 +6,6 @@ import Spinner from "../spinner/Spinner"
 import ErrorMessage from "../errorMessage/ErrorMessage"
 
 class RandomChar extends Component {
-  constructor(props) {
-    super(props)
-    this.updateChar() //Временно, вызывает несколько раз
-  }
-
   state = {
     char: {},
     loading: true,
@@ -19,8 +14,17 @@ class RandomChar extends Component {
 
   marvelService = new MarvelService()
 
+  componentDidMount() {
+    this.updateChar()
+    // this.timerId = setInterval(this.updateChar, 15000)
+    // this.setState({ error: false })
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerId)
+  }
+
   onCharLoaded = (char) => {
-    // console.log("char: ", char)
     this.setState({ char: char, loading: false })
   }
 
@@ -36,35 +40,7 @@ class RandomChar extends Component {
       .getCharacter(id)
       .then(this.onCharLoaded)
       .catch(this.onError)
-  }
-
-  View = ({ char }) => {
-    const { name, description, thumbnail, homepage, wiki } = char
-    const checkDescription = description
-      ? description
-      : "Для этого персонажа описания нет"
-
-    return (
-      <div className="randomchar__block">
-        <img
-          src={thumbnail}
-          alt="Random character"
-          className="randomchar__img"
-        />
-        <div className="randomchar__info">
-          <p className="randomchar__name">{name}</p>
-          <p className="randomchar__descr">{checkDescription}</p>
-          <div className="randomchar__btns">
-            <a href={homepage} className="button button__main">
-              <div className="inner">homepage</div>
-            </a>
-            <a href={wiki} className="button button__secondary">
-              <div className="inner">Wiki</div>
-            </a>
-          </div>
-        </div>
-      </div>
-    )
+      .finally(this.setState({ error: false }))
   }
 
   render() {
@@ -85,10 +61,45 @@ class RandomChar extends Component {
             Do you want to get to know him better?
           </p>
           <p className="randomchar__title">Or choose another one</p>
-          <button className="button button__main">
+          <button className="button button__main" onClick={this.updateChar}>
             <div className="inner">try it</div>
           </button>
           <img src={mjolnir} alt="mjolnir" className="randomchar__decoration" />
+        </div>
+      </div>
+    )
+  }
+
+  View = ({ char }) => {
+    const { name, description, thumbnail, homepage, wiki } = char
+    const checkDescription = description
+      ? description
+      : "Для этого персонажа описания нет"
+
+    return (
+      <div className="randomchar__block">
+        <img
+          src={thumbnail}
+          alt="Random character"
+          className="randomchar__img"
+          // className={`randomchar__img ${
+          //   char.isImageUnavailable ? "randomchar__img--fill" : ""
+          // }`}
+          style={{
+            objectFit: char.isImageUnavailable ? "contain" : "cover",
+          }}
+        />
+        <div className="randomchar__info">
+          <p className="randomchar__name">{name}</p>
+          <p className="randomchar__descr">{checkDescription}</p>
+          <div className="randomchar__btns">
+            <a href={homepage} className="button button__main">
+              <div className="inner">homepage</div>
+            </a>
+            <a href={wiki} className="button button__secondary">
+              <div className="inner">Wiki</div>
+            </a>
+          </div>
         </div>
       </div>
     )

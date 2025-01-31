@@ -72,17 +72,24 @@ class MarvelService {
     const res = await this.getResource("characters", { limit: 9, offset: 210 })
     return res.data.results.map(this._transformCharacter)
   }
+
   getCharacter = async (id) => {
     const res = await this.getResource(`characters/${id}`)
     return this._transformCharacter(res.data.results[0])
   }
+
   _transformCharacter = (char) => {
+    const isImageUnavailable = char.thumbnail.path
+      .toString()
+      .includes("image_not_available")
+
     return {
       name: char.name,
       description: char.description,
       thumbnail: `${char.thumbnail.path}.${char.thumbnail.extension}`,
       homepage: char.urls[0].url,
       wiki: char.urls[1].url,
+      isImageUnavailable,
     }
   }
 }
