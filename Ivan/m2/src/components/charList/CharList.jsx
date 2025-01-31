@@ -1,14 +1,12 @@
 import "./charList.scss"
-// import abyss from "../../resources/img/abyss.jpg"
 import MarvelService from "../../services/MarverService"
 import Spinner from "../spinner/Spinner"
 import ErrorMessage from "../errorMessage/ErrorMessage"
 import { Component } from "react"
-import { v4 as uuidv4 } from "uuid"
 
 class CharList extends Component {
   state = {
-    char: [],
+    charList: [],
     loading: true,
     error: false,
   }
@@ -16,72 +14,67 @@ class CharList extends Component {
   marvelService = new MarvelService()
 
   componentDidMount() {
-    this.updateChar()
-    // this.timerId = setInterval(this.updateChar, 15000)
-    // this.setState({ error: false })
+    this.marvelService
+      .getAllCharacters()
+      .then(this.onCharListLoaded)
+      .catch(this.onError)
   }
 
-  onCharLoaded = (char) => {
-    this.setState({ char: char, loading: false })
+  onCharListLoaded = (charList) => {
+    this.setState({
+      charList,
+      loading: false,
+    })
   }
 
   onError = () => {
-    this.setState({ loading: false, error: true })
+    this.setState({
+      error: true,
+      loading: false,
+    })
   }
 
-  updateChar = () => {
-    this.marvelService
-      .getAllCharacters()
-      .then(this.onCharLoaded)
-      .catch(this.onError)
-      .finally(this.setState({ error: false }))
-  }
+  // Этот метод создан для оптимизации,
+  // чтобы не помещать такую конструкцию в метод render
+  renderItems(arr) {
+    const items = arr.map((item) => {
+      let imgStyle = { objectFit: "cover" }
+      if (
+        item.thumbnail ===
+        "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+      ) {
+        imgStyle = { objectFit: "unset" }
+      }
 
-  loadMore = () => {
-    console.log("test")
+      return (
+        <li className="char__item" key={item.id}>
+          <img src={item.thumbnail} alt={item.name} style={imgStyle} />
+          <div className="char__name">{item.name}</div>
+        </li>
+      )
+    })
+    // А эта конструкция вынесена для центровки спиннера/ошибки
+    return <ul className="char__grid">{items}</ul>
   }
 
   render() {
-    const { char, loading, error } = this.state
+    const { charList, loading, error } = this.state
+
+    const items = this.renderItems(charList)
+
     const errorMessage = error ? <ErrorMessage /> : null
     const spinner = loading ? <Spinner /> : null
-    const content = !(loading || error) ? <this.View char={char} /> : null
+    const content = !(loading || error) ? items : null
 
     return (
       <div className="char__list">
         {errorMessage}
         {spinner}
         {content}
-
-        <button
-          className="button button__main button__long"
-          onClick={this.loadMore}>
+        <button className="button button__main button__long">
           <div className="inner">load more</div>
         </button>
       </div>
-    )
-  }
-
-  View = ({ char }) => {
-    return (
-      <ul className="char__grid">
-        {char.map((item) => {
-          const { name, thumbnail } = item
-
-          return (
-            <li className="char__item" key={uuidv4()}>
-              <img
-                src={thumbnail}
-                alt={name}
-                style={{
-                  objectFit: item.isImageUnavailable ? "contain" : "cover",
-                }}
-              />
-              <div className="char__name">{name}</div>
-            </li>
-          )
-        })}
-      </ul>
     )
   }
 }

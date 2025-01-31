@@ -1,6 +1,7 @@
 import AppHeader from "../appHeader/AppHeader"
 import RandomChar from "../randomChar/RandomChar"
 import CharList from "../charList/CharList"
+// import CharList from "../charList/CharList2"
 import CharInfo from "../charInfo/CharInfo"
 import decoration from "../../resources/img/vision.png"
 

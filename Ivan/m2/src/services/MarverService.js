@@ -84,6 +84,7 @@ class MarvelService {
       .includes("image_not_available")
 
     return {
+      id: char.id,
       name: char.name,
       description: char.description,
       thumbnail: `${char.thumbnail.path}.${char.thumbnail.extension}`,
