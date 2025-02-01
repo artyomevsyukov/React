@@ -38,6 +38,8 @@ class MarvelService {
     return { ts, apikey: this._apiKey, hash }
   }
 
+  paramsUrl() {}
+
   getResource = async (endpoint, params = {}) => {
     const url = new URL(`${this._apiBase}/${endpoint}`)
 
@@ -46,8 +48,6 @@ class MarvelService {
       ...this.generateAuthParams(),
       ...params,
     }).toString()
-
-    // console.log("url: ", url)
 
     const res = await fetch(url, {
       method: "GET",
@@ -63,11 +63,6 @@ class MarvelService {
     return await res.json()
   }
 
-  getAllComics = () => {
-    return this.getResource("comics", { limit: 20, orderBy: "title" })
-    // return this.getResource("comics")
-    // return this.getResource("comics", this.params)
-  }
   getAllCharacters = async () => {
     const res = await this.getResource("characters", { limit: 9, offset: 210 })
     return res.data.results.map(this._transformCharacter)
@@ -91,6 +86,7 @@ class MarvelService {
       thumbnail: `${char.thumbnail.path}.${char.thumbnail.extension}`,
       homepage: char.urls[0].url,
       wiki: char.urls[1].url,
+      comics: char.comics.items,
       isImageUnavailable,
     }
   }
