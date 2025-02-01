@@ -5,31 +5,7 @@ class MarvelService {
   _apiKey = "83dda609af9c0a72f8bc7d01495c3962"
   _privateKey = "b378f8770c78846ef38c67ddc3114d62cf283739"
   params = { limit: 10, orderBy: "title" }
-
-  // ts = Date.now().toString()
-  // hash = md5(this.ts + this._privateKey + this._apiBase).toString()
-
-  // getResource = async (url) => {
-  //   let res = await fetch(url)
-
-  //   if (!res.ok) {
-  //     throw new Error(`Could not fetch ${url}, status: ${res.status}`)
-  //   }
-
-  //   return await res.json()
-  // }
-
-  // getAllCharacters = () => {
-  //   return this.getResource(
-  //     `${this._apiBase}characters?ts=${this.ts}&apikey=${this._apiKey}&hash=${this.hash}&limit=9&offset=210`
-  //   )
-  // }
-
-  // getCharacter = (id) => {
-  //   return this.getResource(
-  //     `${this._apiBase}characters/${id}?ts=${this.ts}&apikey=${this._apiKey}&hash=${this.hash}`
-  //   )
-  // }
+  _baseOffset = 210
 
   generateAuthParams() {
     const ts = Date.now().toString()
@@ -63,8 +39,11 @@ class MarvelService {
     return await res.json()
   }
 
-  getAllCharacters = async () => {
-    const res = await this.getResource("characters", { limit: 9, offset: 210 })
+  getAllCharacters = async (offset = this._baseOffset) => {
+    const res = await this.getResource("characters", {
+      limit: 9,
+      offset: offset,
+    })
     return res.data.results.map(this._transformCharacter)
   }
 

@@ -90,4 +90,8 @@
   &:hover {
     transform: translateY(-5px);
   }
+  &:disabled {
+    filter: grayscale(0.5);
+    transform: none;
+  }
 }
