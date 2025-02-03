@@ -73,9 +73,49 @@ class WhoAmI extends Component {
   }
 }
 
+// render props
+
+const Message = (props) => {
+  return <h2>The counter is {props.counter}</h2>
+}
+const Message2 = (props) => {
+  return <h2>Message2 counter is {props.counter}</h2>
+}
+
+class Counter extends Component {
+  state = {
+    counter: 0,
+  }
+
+  changeCounter = () => {
+    this.setState(({ counter }) => ({ counter: counter + 1 }))
+  }
+
+  render() {
+    return (
+      <>
+        <button className="btn btn-primary" onClick={this.changeCounter}>
+          Click Me!
+        </button>
+        {/* <Message counter={this.state.counter} />  */}
+        {this.props.render(this.state.counter)}
+        {this.props.propsRender(this.state.counter)}
+      </>
+    )
+  }
+}
+
 function App() {
   return (
     <div className="container">
+      <Counter
+        propsRender={(counte) => <Message counter={counte} />}
+        render={(counte) => <Message2 counter={counte} />}
+      />
+      <Counter
+        render={(counte) => <Message counter={counte} />}
+        propsRender={(counte) => <Message2 counter={counte} />}
+      />
       <HelloGreetings />
       <BootstrapTest2
         left={
