@@ -16,6 +16,17 @@ const DynamicGreeting = (props) => {
   )
 }
 
+const HelloGreetings = () => {
+  return (
+    <div style={{ width: "1000px", margin: "0 auto" }}>
+      <DynamicGreeting color={"primary"}>
+        <h2>Class</h2>
+        <h2>Extend</h2>
+      </DynamicGreeting>
+    </div>
+  )
+}
+
 class WhoAmI extends Component {
   constructor(props) {
     super(props)
@@ -65,6 +76,7 @@ class WhoAmI extends Component {
 function App() {
   return (
     <div className="container">
+      <HelloGreetings />
       <BootstrapTest2
         left={
           <DynamicGreeting color={"primary"}>
