@@ -9,7 +9,7 @@ function WhoAmI({ name, surname, link }) {
     </div>
   )
 }
-function App2() {
+function App() {
   return (
     <div>
       <WhoAmI
@@ -30,4 +30,4 @@ function App2() {
   )
 }
 
-export default App2
+export default App
