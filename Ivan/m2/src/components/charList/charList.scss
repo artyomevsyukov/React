@@ -37,6 +37,9 @@
     &:hover {
       animation: glow 1.5s infinite alternate;
     }
+    &:focus {
+      animation: glow 1.5s infinite alternate;
+    }
   }
   @keyframes glow {
     0% {

@@ -15,7 +15,7 @@ class CharList extends Component {
     loading: true,
     error: false,
     newItemLoading: false,
-    offset: 1552,
+    offset: 210,
     charEnded: false,
   }
 
@@ -61,7 +61,6 @@ class CharList extends Component {
     })
   }
 
-  // Этот метод создан для оптимизации,
   // чтобы не помещать такую конструкцию в метод render
   renderItems(arr) {
     const items = arr.map((item) => {
@@ -76,14 +75,21 @@ class CharList extends Component {
       return (
         <li
           className="char__item"
+          tabIndex={0}
           key={item.id}
-          onClick={() => this.props.onCharSelected(item.id)}>
+          onClick={() => this.props.onCharSelected(item.id)}
+          onKeyDown={(e) => {
+            if (e.key === " " || e.key === "Enter") {
+              e.preventDefault()
+              this.props.onCharSelected(item.id)
+            }
+          }}>
           <img src={item.thumbnail} alt={item.name} style={imgStyle} />
           <div className="char__name">{item.name}</div>
         </li>
       )
     })
-    // А эта конструкция вынесена для центровки спиннера/ошибки
+    // для центровки спиннера/ошибки
     return <ul className="char__grid">{items}</ul>
   }
 
