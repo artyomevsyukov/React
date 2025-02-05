@@ -2,7 +2,7 @@ import "./charList.scss"
 import MarvelService from "../../services/MarverService"
 import Spinner from "../spinner/Spinner"
 import ErrorMessage from "../errorMessage/ErrorMessage"
-import { useState, useEffect, useMemo } from "react"
+import { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 
 const CharList = (props) => {
@@ -15,7 +15,7 @@ const CharList = (props) => {
     charEnded: false,
   })
 
-  const marvelService = useMemo(() => new MarvelService(), [])
+  const marvelService = new MarvelService()
 
   const { charList, loading, error, newItemLoading, offset, charEnded } = state
 
