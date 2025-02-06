@@ -1,5 +1,5 @@
 import "./charList.scss"
-import MarvelService from "../../services/MarverService"
+import useMarvelService from "../../services/MarverService"
 import Spinner from "../spinner/Spinner"
 import ErrorMessage from "../errorMessage/ErrorMessage"
 import { useState, useEffect } from "react"
@@ -24,7 +24,9 @@ const CharList = (props) => {
   const [offset, setOffset] = useState(210)
   const [charEnded, setCharEnded] = useState(false)
 
-  const marvelService = new MarvelService()
+  // const marvelService = new MarvelService()
+  //  const { loading, error, getAllCharacters } = useMarvelService()
+  const { getAllCharacters } = useMarvelService()
 
   useEffect(() => {
     onRequest()
@@ -32,7 +34,7 @@ const CharList = (props) => {
 
   const onRequest = (offset) => {
     onCharListLoading()
-    marvelService.getAllCharacters(offset).then(onCharListLoaded).catch(onError)
+    getAllCharacters(offset).then(onCharListLoaded).catch(onError)
   }
 
   // const onCharListLoading = () => {

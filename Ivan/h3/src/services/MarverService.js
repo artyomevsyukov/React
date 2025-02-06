@@ -1,27 +1,25 @@
 import md5 from "crypto-js/md5"
 
-class MarvelService {
-  _apiBase = "http://gateway.marvel.com/v1/public"
-  _apiKey = "83dda609af9c0a72f8bc7d01495c3962"
-  _privateKey = "b378f8770c78846ef38c67ddc3114d62cf283739"
-  params = { limit: 10, orderBy: "title" }
-  _baseOffset = 210
+const useMarvelService = () => {
+  const _apiBase = "http://gateway.marvel.com/v1/public"
+  const _apiKey = "83dda609af9c0a72f8bc7d01495c3962"
+  const _privateKey = "b378f8770c78846ef38c67ddc3114d62cf283739"
+  const params = { limit: 10, orderBy: "title" }
+  const _baseOffset = 210
 
-  generateAuthParams() {
+  const generateAuthParams = () => {
     const ts = Date.now().toString()
-    const hash = md5(ts + this._privateKey + this._apiKey).toString()
+    const hash = md5(ts + _privateKey + _apiKey).toString()
 
-    return { ts, apikey: this._apiKey, hash }
+    return { ts, apikey: _apiKey, hash }
   }
 
-  paramsUrl() {}
-
-  getResource = async (endpoint, params = {}) => {
-    const url = new URL(`${this._apiBase}/${endpoint}`)
+  const getResource = async (endpoint, params = {}) => {
+    const url = new URL(`${_apiBase}/${endpoint}`)
 
     // Добавляем параметры API + аутентификацию
     url.search = new URLSearchParams({
-      ...this.generateAuthParams(),
+      ...generateAuthParams(),
       ...params,
     }).toString()
 
@@ -39,21 +37,20 @@ class MarvelService {
     return await res.json()
   }
 
-  getAllCharacters = async (offset = this._baseOffset) => {
-    const res = await this.getResource("characters", {
+  const getAllCharacters = async (offset = _baseOffset) => {
+    const res = await getResource("characters", {
       limit: 9,
       offset: offset,
     })
-    return res.data.results.map(this._transformCharacter)
+    return res.data.results.map(_transformCharacter)
   }
 
-  getCharacter = async (id) => {
-    const res = await this.getResource(`characters/${id}`)
-
-    return this._transformCharacter(res.data.results[0])
+  const getCharacter = async (id) => {
+    const res = await getResource(`characters/${id}`)
+    return _transformCharacter(res.data.results[0])
   }
 
-  _transformCharacter = (char) => {
+  const _transformCharacter = (char) => {
     const isImageUnavailable = char.thumbnail.path
       .toString()
       .includes("image_not_available")
@@ -69,6 +66,16 @@ class MarvelService {
       isImageUnavailable,
     }
   }
+
+  return {
+    // loading,
+    // error,
+    // clearError,
+    getAllCharacters,
+    getCharacter,
+    // getAllComics,
+    // getComics,
+  }
 }
 
-export default MarvelService
+export default useMarvelService
