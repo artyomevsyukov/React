@@ -1,40 +1,28 @@
+import { useHttp } from "../hooks/http.hook"
 import md5 from "crypto-js/md5"
 
 const useMarvelService = () => {
+  const { loading, request, error, clearError } = useHttp()
+
   const _apiBase = "http://gateway.marvel.com/v1/public"
   const _apiKey = "83dda609af9c0a72f8bc7d01495c3962"
   const _privateKey = "b378f8770c78846ef38c67ddc3114d62cf283739"
-  const params = { limit: 10, orderBy: "title" }
   const _baseOffset = 210
 
   const generateAuthParams = () => {
     const ts = Date.now().toString()
     const hash = md5(ts + _privateKey + _apiKey).toString()
-
     return { ts, apikey: _apiKey, hash }
   }
 
   const getResource = async (endpoint, params = {}) => {
     const url = new URL(`${_apiBase}/${endpoint}`)
-
-    // Добавляем параметры API + аутентификацию
     url.search = new URLSearchParams({
       ...generateAuthParams(),
       ...params,
     }).toString()
 
-    const res = await fetch(url, {
-      method: "GET",
-      headers: {
-        Accept: "*/*",
-      },
-    })
-
-    if (!res.ok) {
-      throw new Error(`Could not fetch ${url}, status: ${res.status}`)
-    }
-
-    return await res.json()
+    return await request(url) // Используем хук useHttp для выполнения запроса
   }
 
   const getAllCharacters = async (offset = _baseOffset) => {
@@ -68,13 +56,11 @@ const useMarvelService = () => {
   }
 
   return {
-    // loading,
-    // error,
-    // clearError,
+    loading,
+    error,
+    clearError,
     getAllCharacters,
     getCharacter,
-    // getAllComics,
-    // getComics,
   }
 }
 

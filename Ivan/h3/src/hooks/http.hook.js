@@ -9,12 +9,19 @@ export const useHttp = () => {
       url,
       method = "GET",
       body = null,
-      headers = { "Counter-Type": "application/json", Accept: "*/*" }
+      headers = { "Content-Type": "application/json" }
     ) => {
       setLoading(true)
 
       try {
-        const response = await fetch(url, { method, body, headers })
+        const response = await fetch(url, {
+          method,
+          body,
+          headers: {
+            ...headers,
+            Accept: "*/*", // Добавляем заголовок Accept
+          },
+        })
 
         if (!response.ok) {
           throw new Error(`Could not fetch ${url}, status: ${response.status}`)
@@ -23,14 +30,16 @@ export const useHttp = () => {
         const data = await response.json()
         setLoading(false)
         return data
-      } catch (error) {
+      } catch (e) {
         setLoading(false)
-        setError(error.message)
-        throw error
+        setError(e.message)
+        throw e
       }
     },
     []
   )
 
   const clearError = useCallback(() => setError(null), [])
+
+  return { loading, request, error, clearError }
 }
