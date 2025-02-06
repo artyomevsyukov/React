@@ -7,6 +7,7 @@ import PropTypes from "prop-types"
 import { v4 as uuidv4 } from "uuid"
 
 const ComicsList = (props) => {
+  console.log("render ComicsList")
   const [comicsList, setComicsList] = useState([])
   const [newItemLoading, setNewItemLoading] = useState(false)
   const [offset, setOffset] = useState(110)
