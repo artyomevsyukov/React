@@ -1,8 +1,8 @@
 import "./charList.scss"
+import { useState, useEffect } from "react"
 import useMarvelService from "../../services/MarverService"
 import Spinner from "../spinner/Spinner"
 import ErrorMessage from "../errorMessage/ErrorMessage"
-import { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 
 const CharList = (props) => {

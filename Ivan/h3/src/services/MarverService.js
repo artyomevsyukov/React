@@ -55,12 +55,38 @@ const useMarvelService = () => {
     }
   }
 
+  const getAllComics = async (offset = _baseOffset) => {
+    const res = await getResource("comics", {
+      limit: 12,
+      offset: offset,
+    })
+    return res.data.results.map(_transformComics)
+    return res.data.results
+  }
+
+  const _transformComics = (item) => {
+    const isImageUnavailable = item.thumbnail.path
+      .toString()
+      .includes("image_not_available")
+
+    return {
+      id: item.id,
+      title: item.title,
+      description: item.description,
+      thumbnail: `${item.thumbnail.path}.${item.thumbnail.extension}`,
+      url: item.urls[0].url,
+      price: item.prices[0].price,
+      isImageUnavailable,
+    }
+  }
+
   return {
     loading,
     error,
     clearError,
     getAllCharacters,
     getCharacter,
+    getAllComics,
   }
 }
 
