@@ -8,34 +8,24 @@ import PropTypes from "prop-types"
 
 const CharInfo = ({ charId }) => {
   const [char, setChar] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
 
   // const marvelService = new MarvelService()
-  const { getCharacter } = useMarvelService()
+  const { loading, error, getCharacter, clearError } = useMarvelService()
 
   useEffect(() => {
-    if (!charId) {
-      return
-    }
     updateChar()
   }, [charId])
 
   const updateChar = () => {
-    setLoading(true)
-    setError(false)
-
-    getCharacter(charId).then(onCharLoaded).catch(onError)
+    if (!charId) {
+      return
+    }
+    clearError()
+    getCharacter(charId).then(onCharLoaded)
   }
 
   const onCharLoaded = (char) => {
     setChar(char)
-    setLoading(false)
-  }
-
-  const onError = () => {
-    setLoading(false)
-    setError(true)
   }
 
   const skeleton = char || loading || error ? null : <Skeleton />

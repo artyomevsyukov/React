@@ -7,40 +7,25 @@ import ErrorMessage from "../errorMessage/ErrorMessage"
 
 const RandomChar = () => {
   const [char, setChar] = useState({})
-  const [loading, setloading] = useState(true)
-  const [error, setError] = useState(false)
+  // const [loading, setloading] = useState(true)
+  // const [error, setError] = useState(false)
 
-  // const { loading, error, getCharacter, clearError } = useMarvelService()
-
-  const { getCharacter } = useMarvelService()
+  const { loading, error, getCharacter, clearError } = useMarvelService()
 
   useEffect(() => {
     updateChar()
-    setError(false)
     const timerId = setInterval(updateChar, 60000)
     return () => clearInterval(timerId)
   }, [])
 
   const onCharLoaded = (char) => {
-    setloading(false)
     setChar(char)
   }
 
-  const onCharLoading = () => {
-    setloading(true)
-  }
-
-  const onError = () => {
-    setloading(false)
-    setError(true)
-  }
-
   const updateChar = () => {
-    // 1011284  - 404
-    // const id = 1011284
-    onCharLoading()
+    clearError()
     const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000)
-    getCharacter(id).then(onCharLoaded).catch(onError).finally(setError(false))
+    getCharacter(id).then(onCharLoaded)
   }
 
   const errorMessage = error ? <ErrorMessage /> : null
