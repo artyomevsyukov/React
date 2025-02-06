@@ -6,18 +6,25 @@ import { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 
 const CharList = (props) => {
-  const [state, setState] = useState({
-    charList: [],
-    loading: true,
-    error: false,
-    newItemLoading: false,
-    offset: 210,
-    charEnded: false,
-  })
+  // const [state, setState] = useState({
+  //   charList: [],
+  //   loading: true,
+  //   error: false,
+  //   newItemLoading: false,
+  //   offset: 210,
+  //   charEnded: false,
+  // })
+
+  // const { charList, loading, error, newItemLoading, offset, charEnded } = state
+
+  const [charList, setCharList] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
+  const [newItemLoading, setNewItemLoading] = useState(false)
+  const [offset, setOffset] = useState(210)
+  const [charEnded, setCharEnded] = useState(false)
 
   const marvelService = new MarvelService()
-
-  const { charList, loading, error, newItemLoading, offset, charEnded } = state
 
   useEffect(() => {
     onRequest()
@@ -28,8 +35,12 @@ const CharList = (props) => {
     marvelService.getAllCharacters(offset).then(onCharListLoaded).catch(onError)
   }
 
+  // const onCharListLoading = () => {
+  //   setState((prev) => ({ ...prev, newItemLoading: true }))
+  // }
+
   const onCharListLoading = () => {
-    setState((prev) => ({ ...prev, newItemLoading: true }))
+    setNewItemLoading(true)
   }
 
   const onCharListLoaded = (newCharList) => {
@@ -38,22 +49,31 @@ const CharList = (props) => {
       ended = true
     }
 
-    setState(({ offset, charList }) => ({
-      charList: [...charList, ...newCharList],
-      loading: false,
-      newItemLoading: false,
-      offset: offset + 9,
-      charEnded: ended,
-    }))
+    // setState(({ offset, charList }) => ({
+    //   charList: [...charList, ...newCharList],
+    //   loading: false,
+    //   newItemLoading: false,
+    //   offset: offset + 9,
+    //   charEnded: ended,
+    // }))
+
+    setCharList((charList) => [...charList, ...newCharList])
+    setLoading((loading) => false)
+    setNewItemLoading((newItemLoading) => false)
+    setOffset((offset) => offset + 9)
+    setCharEnded((charEnded) => ended)
   }
 
   const onError = () => {
-    setState((prev) => ({
-      ...prev,
-      error: true,
-      loading: false,
-      newItemLoading: false,
-    }))
+    // setState((prev) => ({
+    //   ...prev,
+    //   error: true,
+    //   loading: false,
+    //   newItemLoading: false,
+    // }))
+    setError(true)
+    setLoading((loading) => false)
+    setNewItemLoading(false)
   }
 
   // чтобы не помещать такую конструкцию в метод render
