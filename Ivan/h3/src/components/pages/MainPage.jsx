@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 import CharList from "../charList/CharList"
 import CharInfo from "../charInfo/CharInfo"
