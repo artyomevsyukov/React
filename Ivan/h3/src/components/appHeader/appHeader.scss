@@ -5,6 +5,10 @@
     display: flex;
     justify-content: space-between;
   }
+
+  &__link {
+    color: rgb(22, 2, 201);
+  }
   &__title {
     font-weight: bold;
     font-size: 28px;
