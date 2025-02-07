@@ -7,7 +7,6 @@ import PropTypes from "prop-types"
 import { v4 as uuidv4 } from "uuid"
 
 const ComicsList = (props) => {
-  console.log("render ComicsList")
   const [comicsList, setComicsList] = useState([])
   const [newItemLoading, setNewItemLoading] = useState(false)
   const [offset, setOffset] = useState(110)
@@ -32,13 +31,12 @@ const ComicsList = (props) => {
     }
 
     setComicsList((comicsList) => [...comicsList, ...newComicsList])
-    setNewItemLoading((newItemLoading) => false)
-    setOffset((offset) => offset + 12)
-    setComicsEnded((comicsEnded) => ended)
+    setNewItemLoading(false)
+    setOffset(offset + 12)
+    setComicsEnded(ended)
   }
 
   const renderItems = (arr) => {
-    console.log("Comics List: ", arr)
     const items = arr.map((item) => {
       return (
         <li
@@ -73,7 +71,7 @@ const ComicsList = (props) => {
 
   const errorMessage = error ? <ErrorMessage /> : null
   const spinner = loading && !newItemLoading ? <Spinner /> : null
-
+  console.log("render ComicsList - 2")
   return (
     <div className="comics__list">
       {errorMessage}
@@ -91,7 +89,7 @@ const ComicsList = (props) => {
 }
 
 ComicsList.propTypes = {
-  onComicsSelected: PropTypes.func.isRequired,
+  onComicsSelected: PropTypes.func,
 }
 
 export default ComicsList

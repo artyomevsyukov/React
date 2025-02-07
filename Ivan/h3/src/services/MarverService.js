@@ -61,7 +61,7 @@ const useMarvelService = () => {
       offset: offset,
     })
     return res.data.results.map(_transformComics)
-    return res.data.results
+    // return res.data.results
   }
 
   const _transformComics = (item) => {
@@ -72,10 +72,16 @@ const useMarvelService = () => {
     return {
       id: item.id,
       title: item.title,
-      description: item.description,
+      description: item.description || "There is no description",
+      pageCount: item.pageCount
+        ? `${item.pageCount} p.`
+        : "No information about the number of pages",
       thumbnail: `${item.thumbnail.path}.${item.thumbnail.extension}`,
+      language: item.textObjects[0]?.language || "en-us",
       url: item.urls[0].url,
-      price: item.prices[0].price,
+      price: item.prices[0].price
+        ? `${item.prices[0].price}$`
+        : "not available",
       isImageUnavailable,
     }
   }
