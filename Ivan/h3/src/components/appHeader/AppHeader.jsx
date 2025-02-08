@@ -25,7 +25,7 @@ const AppHeader = () => {
           <li>
             {/* <NavLink  to="/comics" activeStyle={{ color: "blue" }}> */}
             <NavLink
-              end
+              // end // для строгого сравнения, если убрать то будет активный для всех путей дальше
               to="/comics"
               // activeClassName="app__link"
               className={({ isActive }) => "" + (isActive ? "app__link" : "")}>
