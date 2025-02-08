@@ -13,14 +13,22 @@ const AppHeader = () => {
       <nav className="app__menu">
         <ul>
           <li>
-            <NavLink to="/" activeStyle={{ color: "#9f0013" }}>
+            <NavLink
+              end
+              to="/"
+              // activeStyle={{ color: "#9f0013" }}
+              style={({ isActive }) => ({ color: isActive ? "#9f0013" : "" })}>
               Characters
             </NavLink>
           </li>
           /
           <li>
             {/* <NavLink  to="/comics" activeStyle={{ color: "blue" }}> */}
-            <NavLink to="/comics" activeClassName="app__link">
+            <NavLink
+              end
+              to="/comics"
+              // activeClassName="app__link"
+              className={({ isActive }) => "" + (isActive ? "app__link" : "")}>
               Comics
             </NavLink>
           </li>

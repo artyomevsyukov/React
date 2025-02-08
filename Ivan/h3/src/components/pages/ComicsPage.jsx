@@ -22,8 +22,8 @@ const ComicsPage = () => {
   return (
     <>
       <AppBanner />
-      {comicsList ? <ComicsList comics={comicsList} /> : <Spinner />}
-      {/* <ComicsList onComicsSelected={onComicsSelected} /> */}
+      {/* {comicsList ? <ComicsList comics={comicsList} /> : <Spinner />} */}
+      <ComicsList onComicsSelected={onComicsSelected} />
     </>
   )
 }

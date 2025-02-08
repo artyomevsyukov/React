@@ -71,7 +71,6 @@ const ComicsList = (props) => {
 
   const errorMessage = error ? <ErrorMessage /> : null
   const spinner = loading && !newItemLoading ? <Spinner /> : null
-  console.log("render ComicsList - 2")
   return (
     <div className="comics__list">
       {errorMessage}
