@@ -64,6 +64,11 @@ const useMarvelService = () => {
     // return res.data.results
   }
 
+  const getComic = async (id) => {
+    const res = await getResource(`comics/${id}`)
+    return _transformComics(res.data.results[0])
+  }
+
   const _transformComics = (item) => {
     const isImageUnavailable = item.thumbnail.path
       .toString()
@@ -93,6 +98,7 @@ const useMarvelService = () => {
     getAllCharacters,
     getCharacter,
     getAllComics,
+    getComic,
   }
 }
 

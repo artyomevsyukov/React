@@ -1,4 +1,5 @@
 import "./comicsList.scss"
+import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 import useMarvelService from "../../services/MarverService"
 import Spinner from "../spinner/Spinner"
@@ -6,7 +7,7 @@ import ErrorMessage from "../errorMessage/ErrorMessage"
 import PropTypes from "prop-types"
 import { v4 as uuidv4 } from "uuid"
 
-const ComicsList = (props) => {
+const ComicsList = () => {
   const [comicsList, setComicsList] = useState([])
   const [newItemLoading, setNewItemLoading] = useState(false)
   const [offset, setOffset] = useState(110)
@@ -43,15 +44,14 @@ const ComicsList = (props) => {
           className="comics__item"
           tabIndex={0}
           key={uuidv4()}
-          onClick={() => props.onComicsSelected(item.id)}
+          // onClick={() => props.onComicsSelected(item.id)}
           onKeyDown={(e) => {
             if (e.code === "Space" || e.key === "Enter") {
               e.preventDefault()
-              props.onComicsSelected(item.id)
+              // props.onComicsSelected(item.id)
             }
           }}>
-          {/* <a href={item.url}> */}
-          <a href="#">
+          <Link to={`/comics/${item.id}`}>
             <img
               src={item.thumbnail}
               alt="ultimate war"
@@ -59,7 +59,7 @@ const ComicsList = (props) => {
             />
             <div className="comics__item-name">{item.title}</div>
             <div className="comics__item-price">{item.price}</div>
-          </a>
+          </Link>
         </li>
       )
     })
