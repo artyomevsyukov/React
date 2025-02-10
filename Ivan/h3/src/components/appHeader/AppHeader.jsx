@@ -3,6 +3,10 @@ import "./appHeader.scss"
 import { Link, NavLink } from "react-router-dom"
 
 const AppHeader = () => {
+  const preload = (component) => () => {
+    component()
+  }
+
   return (
     <header className="app__header">
       <h1 className="app__title">
@@ -27,6 +31,7 @@ const AppHeader = () => {
             <NavLink
               // end // для строгого сравнения, если убрать то будет активный для всех путей дальше
               to="/comics"
+              onMouseEnter={preload(() => import("../pages/ComicsPage"))} // Предзагрузка Home
               // activeClassName="app__link"
               className={({ isActive }) => "" + (isActive ? "app__link" : "")}>
               Comics
