@@ -1,9 +1,12 @@
-import "./charList.scss"
 import { useState, useEffect } from "react"
+import PropTypes from "prop-types"
+import { CSSTransition, TransitionGroup } from "react-transition-group"
+
 import useMarvelService from "../../services/MarverService"
 import Spinner from "../spinner/Spinner"
 import ErrorMessage from "../errorMessage/ErrorMessage"
-import PropTypes from "prop-types"
+
+import "./charList.scss"
 
 const CharList = (props) => {
   // const [state, setState] = useState({
