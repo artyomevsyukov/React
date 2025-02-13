@@ -19,10 +19,7 @@ const Slider = () => {
           src="https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg"
           alt="slide"
         />
-        <div className="text-center mt-5">
-          Active slide {slide} <br />
-          {autoplay ? "auto" : null}{" "}
-        </div>
+
         <div className="buttons mt-3">
           <button
             className="btn btn-primary me-2"
@@ -39,6 +36,10 @@ const Slider = () => {
             onClick={() => setAutoplay(!autoplay)}>
             toggle autoplay
           </button>
+          <div className="text-center mt-5 fs-2">
+            Active slide {slide} <br />
+            {autoplay ? "auto" : null}{" "}
+          </div>
         </div>
       </div>
     </Container>
