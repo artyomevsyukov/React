@@ -3,6 +3,8 @@ import { useState, useEffect } from "react"
 import useMarvelService from "../../services/MarverService"
 import Spinner from "../spinner/Spinner"
 import ErrorMessage from "../errorMessage/ErrorMessage"
+import { Helmet } from "react-helmet"
+
 import "./singleComicPage.scss"
 
 const SingleComicPage = () => {
@@ -46,6 +48,10 @@ const View = ({ comic }) => {
 
   return (
     <>
+      <Helmet>
+        <meta name="description" content={`${title} comics book`}></meta>
+        <title>{title}</title>
+      </Helmet>
       <div className="single-comic">
         <img src={thumbnail} alt={title} className="single-comic__img" />
         <div className="single-comic__info">
