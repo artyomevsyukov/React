@@ -27,7 +27,9 @@ function Recipe({ id, name, ingredients }) {
       <h2>{name}</h2>
       <ul>
         {ingredients.map((ingredient) => (
-          <li key={ingredient}>{ingredient}</li>
+          <li key={ingredient} style={{ textAlign: "start" }}>
+            {ingredient}
+          </li>
         ))}
       </ul>
     </div>
