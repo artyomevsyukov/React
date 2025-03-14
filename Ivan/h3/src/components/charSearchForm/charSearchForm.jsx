@@ -9,14 +9,16 @@ import "./charSearchForm.scss"
 
 const CharSearchForm = () => {
   const [char, setChar] = useState(null)
-  const { loading, error, getCharacter, clearError } = useMarvelService()
+  const { loading, error, getCharacter, getCharacterNames, clearError } =
+    useMarvelService()
 
   const updateChar = (char) => {
     if (!char) {
       return
     }
     clearError()
-    getCharacter(char).then(onCharLoaded)
+    // getCharacter(char).then(onCharLoaded)
+    getCharacterNames(char).then(onCharLoaded)
   }
 
   const onCharLoaded = (char) => {
@@ -29,6 +31,7 @@ const CharSearchForm = () => {
     </div>
   ) : null
 
+  console.log("char pre render: ", char)
   const results = !char ? null : char.length > 0 ? (
     <div className="char__search-wrapper">
       <div className="char__search-success">

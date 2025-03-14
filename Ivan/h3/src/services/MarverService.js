@@ -37,8 +37,25 @@ const useMarvelService = () => {
     const res = await getResource(`characters/${id}`)
     return _transformCharacter(res.data.results[0])
   }
+  const getCharacterNames = async (name) => {
+    const res = await getResource(`characters`)
+    console.log("res.data.results: ", res.data.results)
+
+    const filteredRes = res.data.results
+
+    console.log("name: ", name)
+    const findChar = filteredRes.filter((char) =>
+      char.name.toLowerCase().includes(name.toLowerCase())
+    )
+    console.log(findChar)
+    return findChar
+    // return _transformCharacter(findChar[0])
+    // return _transformCharacter(res.data.results[0])
+  }
 
   const _transformCharacter = (char) => {
+    console.log("CHARS: ", char)
+
     const isImageUnavailable = char.thumbnail.path
       .toString()
       .includes("image_not_available")
@@ -97,6 +114,7 @@ const useMarvelService = () => {
     clearError,
     getAllCharacters,
     getCharacter,
+    getCharacterNames,
     getAllComics,
     getComic,
   }
