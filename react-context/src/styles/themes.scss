@@ -1,0 +1,15 @@
+// Светлая тема (по умолчанию)
+:root {
+  --color-bg: #a79c9c;
+  --color-text: #000000;
+  --color-button-bg: #b49898;
+  --color-button-text: #7265b8;
+}
+
+/* Темная тема */
+[data-theme="dark"] {
+  --color-bg: #222;
+  --color-text: #fff;
+  --color-button-bg: #4b4444;
+  --color-button-text: #35b31c;
+}
