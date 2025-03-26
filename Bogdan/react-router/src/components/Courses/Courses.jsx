@@ -6,11 +6,21 @@ import styles from "./Courses.module.css"
 
 // ME создать массив динамически
 // const SORT_KEYS = ["title", "id", "slug"]
+
 function getUniqueSortKeys(arr) {
   return Array.from(new Set(arr.flatMap((obj) => Object.keys(obj))))
 }
 const SORT_KEYS = getUniqueSortKeys(courses)
 console.log("SORT_KEYS: ", SORT_KEYS)
+
+// const SORT_KEYS = courses.reduce((keys, course) => {
+//   Object.keys(course).forEach((key) => {
+//     if (!keys.includes(key)) {
+//       keys.push(key)
+//     }
+//   })
+//   return keys
+// }, [])
 
 function sortCourses(courses, key) {
   if (!key || !SORT_KEYS.includes(key)) {
