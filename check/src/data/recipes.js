@@ -1,8 +1,9 @@
-export const recipes = [
+export const initialRecipes = [
   {
     id: "greek-salad",
-    name: "Greek Salad",
+    name: "Name Greek Salad",
     ingredients: ["tomatoes", "cucumber", "onion", "olives", "feta"],
+    desc: "Способ приготовления",
   },
   {
     id: "hawaiian-pizza",
@@ -14,10 +15,12 @@ export const recipes = [
       "ham",
       "pineapple",
     ],
+    desc: "Способ приготовления",
   },
   {
     id: "hummus",
     name: "Hummus",
     ingredients: ["chickpeas", "olive oil", "garlic cloves", "lemon", "tahini"],
+    desc: "Способ приготовления",
   },
 ]

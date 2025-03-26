@@ -1,11 +1,11 @@
 import "./App.css"
-import { recipes } from "./data/recipes"
+import { initialRecipes } from "./data/recipes"
 
 // function App2() {
 //   return (
 //     <>
 //       <h1>Text123</h1>
-//       {recipes.map((recipe) => {
+//       {initialRecipes.map((recipe) => {
 //         return (
 //           <div key={recipe.id}>
 //             <h2>{recipe.name}</h2>
@@ -40,7 +40,7 @@ function App2() {
   return (
     <div>
       <h1>Recipes</h1>
-      {recipes.map((recipe) => (
+      {initialRecipes.map((recipe) => (
         <Recipe {...recipe} key={recipe.id} />
       ))}
     </div>
