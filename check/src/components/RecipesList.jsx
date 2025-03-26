@@ -1,21 +1,42 @@
-// import { useRecipe } from "../hooks/useRecipe"
 import { useRecipe } from "../context/RecipeContext"
+import { initialRecipes } from "../data/recipes"
+import { v4 as uuidv4 } from "uuid"
+import AddRecipe from "./AddRecipe"
 
 const RecipesList = () => {
-  const { recipes } = useRecipe()
-  const recipesContext = useRecipe()
-  console.log("recipeContext: ", recipes)
-  console.log("recipeContext: ", recipesContext)
+  const { recipes, setRecipes, deleteRecipe } = useRecipe()
   return (
     <div>
-      {recipes.map((recipe) => (
-        <div key={recipe.id} style={{ marginBottom: "30px" }}>
-          <div>{recipe.id}</div>
-          <div>{recipe.name}</div>
-        </div>
-      ))}
+      <AddRecipe />
+      <div style={{ marginBottom: "30px" }}>
+        <button onClick={() => setRecipes("")}>Clear</button>
+        <button onClick={() => setRecipes(initialRecipes)}>Reset</button>
+      </div>
+
+      {recipes.length > 0 ? (
+        recipes.map((recipe) => (
+          <div key={recipe.id} style={{ marginBottom: "30px" }}>
+            <div>{recipe.name}</div>
+            <div>{recipe.desc}</div>
+            {/* Вынести в отдельный компонент */}
+            <ul>
+              {recipe.ingredients.map((ingredient) => (
+                // <li key={`${recipe.id}-${ingredient}-${i}`}>
+                //   {ingredient.name} - {ingredient.amount}
+                // </li>
+                <li key={uuidv4()}>
+                  {ingredient.name} - {ingredient.amount}
+                </li>
+              ))}
+            </ul>
+
+            <button onClick={() => deleteRecipe(recipe.id)}>Delete</button>
+          </div>
+        ))
+      ) : (
+        <div>Нет данных</div>
+      )}
     </div>
-    // <div>Test</div>
   )
 }
 export default RecipesList

@@ -3,7 +3,7 @@ import "./App.css"
 import ThemeProvider from "./context/ThemeProvider"
 import ThemeSwitcher from "./components/ThemeSwitcher"
 import ThemeDisplay from "./components/ThemeDisplay"
-import "./styles/themes.css"
+import "./styles/themes.scss"
 
 function App() {
   return (
