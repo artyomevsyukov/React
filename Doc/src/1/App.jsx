@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 
 import "./App.css"
 
@@ -7,6 +7,11 @@ function App() {
   const [answer, setAnswer] = useState("")
   const [error, setError] = useState(null)
 
+  useEffect(() => {
+    inputAnswerRef.current?.focus()
+  }, [])
+
+  const inputAnswerRef = useRef(null)
   if (status === "success") {
     return <h2>That's right!</h2>
   }
@@ -17,17 +22,19 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setStatus("submitting")
+    setStatus("typing")
     try {
-      await submitForm(answer)
+      await submitAnswer(answer)
       setStatus("success")
     } catch (error) {
       setStatus("typing")
+      setAnswer("")
+      inputAnswerRef.current?.focus()
       setError(error)
     }
   }
 
-  const submitForm = async (answer) => {
+  const submitAnswer = async (answer) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         let response = answer.toLowerCase() !== "lima"
@@ -48,6 +55,7 @@ function App() {
       </p>
       <form onSubmit={handleSubmit}>
         <textarea
+          ref={inputAnswerRef}
           onChange={handleChangeTextarea}
           value={answer}
           disabled={status === "submitting"}
