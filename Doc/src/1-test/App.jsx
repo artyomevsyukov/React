@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react"
 
 import "./App.css"
 
-function App() {
+function App1() {
   const [status, setStatus] = useState("typing")
   const [answer, setAnswer] = useState("")
   const [error, setError] = useState(null)
@@ -56,6 +56,7 @@ function App() {
       <form onSubmit={handleSubmit}>
         <textarea
           ref={inputAnswerRef}
+          // autoFocus
           onChange={handleChangeTextarea}
           value={answer}
           disabled={status === "submitting"}
@@ -74,4 +75,4 @@ function App() {
   )
 }
 
-export default App
+export default App1
