@@ -22,7 +22,7 @@ function App1() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setStatus("typing")
+    setStatus("submitting")
     try {
       await submitAnswer(answer)
       setStatus("success")

@@ -1,0 +1,11 @@
+.add-task {
+  display: flex;
+  gap: 10px;
+}
+
+.task-list__item {
+}
+
+.task {
+  display: flex;
+}

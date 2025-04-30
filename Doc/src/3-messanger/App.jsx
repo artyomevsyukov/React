@@ -15,7 +15,7 @@ function App3() {
       <h2>Chat</h2>
       <ChatList
         contacts={contacts}
-        setTo={setTo}
+        // setTo={setTo}
         onSelect={(contact) => setTo(contact)}
       />
       {/* Не сбрасывает состояние */}
