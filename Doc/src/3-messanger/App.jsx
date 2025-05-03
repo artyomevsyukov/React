@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import "./App.css"
+import styles from "./App.module.css"
 
 const contacts = [
   { name: "Taylor", email: "taylor@mail.com" },
@@ -29,7 +29,7 @@ function App3() {
 
 function ChatList({ contacts, onSelect }) {
   return (
-    <section className="contact-list">
+    <section className={styles["contact-list"]}>
       <ul>
         {contacts.map((contact) => {
           return (
@@ -46,7 +46,7 @@ function ChatList({ contacts, onSelect }) {
 function Chat({ to }) {
   const [text, setText] = useState("")
   return (
-    <section className="chat">
+    <section className={styles["chat"]}>
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}

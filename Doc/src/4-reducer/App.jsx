@@ -1,6 +1,5 @@
 import AddTask from "./AddTask"
 import TaskList from "./TaskList"
-import "./App.css"
 import { TasksProvider } from "./TaskContext"
 
 function App4() {

@@ -4,8 +4,15 @@
 }
 
 .task-list__item {
+  margin: 10px;
 }
 
 .task {
   display: flex;
+  gap: 10px;
+}
+
+p {
+  padding: 0;
+  margin: 0;
 }

@@ -1,13 +1,15 @@
-import { useTasks } from "./TaskContext"
+import { useState } from "react"
+import { useTasks, useTasksDispatch } from "./TaskContext"
+import styles from "./App.module.css"
 
 const TaskList = () => {
   const tasks = useTasks()
 
   return (
-    <ul className="task-list">
+    <ul className={styles["task-list"]}>
       {tasks.map((task) => {
         return (
-          <li key={task.id} className="task-list__item">
+          <li key={task.id} className={styles["task-list__item"]}>
             <Task task={task} />
           </li>
         )
@@ -17,24 +19,61 @@ const TaskList = () => {
 }
 
 const Task = ({ task }) => {
+  // const [text, setText] = useState(task.text)
+  const [isEdited, setIsEdited] = useState(false)
+
+  const dispatch = useTasksDispatch()
   let taskContent
-  if (task.done) {
+
+  if (isEdited) {
     taskContent = (
       <>
-        <p>{task.text}</p>
-        {/* <button onClick={()=>{}}>Edit</button> */}
-        <button onClick={() => {}}>Edit</button>
+        <input
+          value={task.text}
+          onChange={(e) =>
+            dispatch({
+              type: "change",
+              task: { ...task, text: e.target.value },
+            })
+          }
+        />
+        <button
+          onClick={() => {
+            setIsEdited(false)
+          }}>
+          Save
+        </button>
       </>
     )
   } else {
-    taskContent = <p>2</p>
+    taskContent = (
+      <>
+        <p>{task.text}</p>
+        <button
+          onClick={() => {
+            setIsEdited(true)
+          }}>
+          Edit
+        </button>
+      </>
+    )
   }
   return (
-    <label className="task">
-      {/* <input type="checkbox" checked={task.done} onChange={}/> */}
-      <input type="checkbox" checked={task.done} />
+    <label className={styles["task"]}>
+      <input
+        type="checkbox"
+        checked={task.done}
+        onChange={(e) => {
+          dispatch({
+            type: "change",
+            task: { ...task, done: e.target.checked },
+          })
+        }}
+      />
       {taskContent}
-      <button>Delete</button>
+      <button onClick={() => dispatch({ type: "deleted", id: task.id })}>
+        Delete
+      </button>
     </label>
   )
 }

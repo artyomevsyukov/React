@@ -36,11 +36,19 @@ const taskrsReducer = (tasks, action) => {
         },
       ]
     }
+
     case "change": {
-      return 1
+      return tasks.map((task) => {
+        if (task.id === action.task.id) {
+          return action.task
+        } else {
+          return task
+        }
+      })
     }
+
     case "deleted": {
-      return 1
+      return tasks.filter((task) => task.id !== action.id)
     }
 
     default:

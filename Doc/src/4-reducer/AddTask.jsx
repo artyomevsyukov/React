@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { useTasks, useTasksDispatch } from "./TaskContext"
+import styles from "./App.module.css"
 
 const AddTask = () => {
   const [text, setText] = useState("")
@@ -11,7 +12,7 @@ const AddTask = () => {
   }, [tasks])
 
   return (
-    <section className="add-task">
+    <section className={styles["add-task"]}>
       <input
         value={text}
         placeholder={"Add task"}
