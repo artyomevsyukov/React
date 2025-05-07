@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 
 import styles from "./App.module.css"
 
@@ -10,13 +10,17 @@ const contacts = [
 
 function App3() {
   const [to, setTo] = useState(contacts[0])
+
+  const handleSelect = (contact) => setTo(contact)
+
   return (
     <section>
       <h2>Chat</h2>
       <ChatList
         contacts={contacts}
         // setTo={setTo}
-        onSelect={(contact) => setTo(contact)}
+        // onSelect={(contact) => setTo(contact)}
+        onSelect={handleSelect}
       />
       {/* Не сбрасывает состояние */}
       <Chat to={to} />
@@ -35,6 +39,7 @@ function ChatList({ contacts, onSelect }) {
           return (
             <li key={contact.email}>
               <button onClick={() => onSelect(contact)}>{contact.name}</button>
+              {/* <button onClick={() => onSelect(contact)}>{contact.name}</button> */}
             </li>
           )
         })}
@@ -45,9 +50,17 @@ function ChatList({ contacts, onSelect }) {
 
 function Chat({ to }) {
   const [text, setText] = useState("")
+  const textareaRef = useRef(null)
+
+  useEffect(() => {
+    textareaRef.current?.focus()
+  }, [to])
+
   return (
     <section className={styles["chat"]}>
       <textarea
+        ref={textareaRef}
+        // autoFocus
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder={"Chat to " + to.name}

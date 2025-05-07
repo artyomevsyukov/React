@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useTasks, useTasksDispatch } from "./TaskContext"
 import styles from "./App.module.css"
 
@@ -21,15 +21,25 @@ const TaskList = () => {
 const Task = ({ task }) => {
   // const [text, setText] = useState(task.text)
   const [isEdited, setIsEdited] = useState(false)
-
+  const inputRef = useRef(null)
   const dispatch = useTasksDispatch()
-  let taskContent
 
+  useEffect(() => {
+    // if (isEdited && inputRef.current) {
+    if (isEdited) {
+      // inputRef.current?.focus()
+      inputRef.current?.select()
+    }
+  }, [isEdited])
+
+  let taskContent
   if (isEdited) {
     taskContent = (
       <>
         <input
           value={task.text}
+          ref={inputRef}
+          // autoFocus
           onChange={(e) =>
             dispatch({
               type: "change",
@@ -38,6 +48,7 @@ const Task = ({ task }) => {
           }
         />
         <button
+          className={styles["button"]}
           onClick={() => {
             setIsEdited(false)
           }}>
@@ -48,16 +59,19 @@ const Task = ({ task }) => {
   } else {
     taskContent = (
       <>
-        <p>{task.text}</p>
+        <p className={styles["text"]}>{task.text}</p>
         <button
+          className={styles["button"]}
           onClick={() => {
             setIsEdited(true)
+            inputRef.current.focus()
           }}>
           Edit
         </button>
       </>
     )
   }
+
   return (
     <label className={styles["task"]}>
       <input
@@ -71,7 +85,9 @@ const Task = ({ task }) => {
         }}
       />
       {taskContent}
-      <button onClick={() => dispatch({ type: "deleted", id: task.id })}>
+      <button
+        className={styles["button"]}
+        onClick={() => dispatch({ type: "deleted", id: task.id })}>
         Delete
       </button>
     </label>

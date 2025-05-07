@@ -57,11 +57,12 @@ li {
   margin: 0;
   padding: 0;
 }
+
+textarea {
+  height: 150px;
+}
 li button {
   width: 100px;
   padding: 10px;
   margin-right: 10px;
-}
-textarea {
-  height: 150px;
 }
