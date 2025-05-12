@@ -3,6 +3,10 @@
   gap: 10px;
 }
 
+.task-list {
+  list-style-type: none;
+}
+
 .task-list__item {
   margin: 10px;
 }

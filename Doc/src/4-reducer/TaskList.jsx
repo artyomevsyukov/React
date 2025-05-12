@@ -19,7 +19,6 @@ const TaskList = () => {
 }
 
 const Task = ({ task }) => {
-  // const [text, setText] = useState(task.text)
   const [isEdited, setIsEdited] = useState(false)
   const inputRef = useRef(null)
   const dispatch = useTasksDispatch()
@@ -32,6 +31,28 @@ const Task = ({ task }) => {
     }
   }, [isEdited])
 
+  const handleInputChange = (e) => {
+    dispatch({
+      type: "change",
+      task: { ...task, text: e.target.value },
+    })
+  }
+
+  const handleInputKeyDown = (e) => {
+    if (e.key === "Enter") {
+      setIsEdited(false)
+    }
+  }
+
+  const handleCheckboxKeyDown = (e) => {
+    if (e.key === "Enter") {
+      dispatch({
+        type: "change",
+        task: { ...task, done: !task.done },
+      })
+    }
+  }
+
   let taskContent
   if (isEdited) {
     taskContent = (
@@ -40,12 +61,8 @@ const Task = ({ task }) => {
           value={task.text}
           ref={inputRef}
           // autoFocus
-          onChange={(e) =>
-            dispatch({
-              type: "change",
-              task: { ...task, text: e.target.value },
-            })
-          }
+          onChange={handleInputChange}
+          onKeyDown={handleInputKeyDown}
         />
         <button
           className={styles["button"]}
@@ -83,6 +100,7 @@ const Task = ({ task }) => {
             task: { ...task, done: e.target.checked },
           })
         }}
+        onKeyDown={handleCheckboxKeyDown}
       />
       {taskContent}
       <button
