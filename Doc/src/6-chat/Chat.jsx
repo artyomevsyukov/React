@@ -1,22 +1,24 @@
-export default function Chat({ contact, message, dispatch }) {
+export default function Chat({ contact, draftMessage, dispatch }) {
   return (
     <section className="chat">
       <textarea
-        value={message}
+        value={draftMessage}
         placeholder={"Chat to " + contact.name}
         onChange={(e) => {
           dispatch({
-            type: "edited_message",
-            message: e.target.value,
+            type: "edited_draftMessage",
+            draftMessage: e.target.value,
           })
         }}
       />
       <br />
       <button
         onClick={() => {
-          alert(`Sending "${message}" to ${contact.email}`)
+          alert(`Sending "${draftMessage}" to ${contact.email}`)
+          console.log("draftMessage: ", draftMessage)
           dispatch({
             type: "sent_message",
+            text: draftMessage,
           })
         }}>
         Send to {contact.email}

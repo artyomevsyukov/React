@@ -2,7 +2,7 @@ import { nanoid } from "nanoid"
 
 export const initialState = {
   selectedId: 0,
-  messages: {
+  draftMessages: {
     0: "Hello, Taylor",
     1: "Hello, Alice",
     2: "Hello, Bob",
@@ -35,30 +35,47 @@ export function messengerReducer(state, action) {
             id: newId,
             name: action.name,
             email: action.email,
+            messages: [],
           },
         ],
-        messages: {
-          ...state.messages,
-          [newId]: `Hello, ${action.name}`, // Автоматическое приветствие
+        draftMessages: {
+          ...state.draftMessages,
+          [newId]: `Hello, ${action.name}`,
         },
-        selectedId: newId, // Опционально: сразу выбрать новый контакт
+        selectedId: newId, // сразу выбрать новый контакт
       }
-    case "edited_message": {
+    case "edited_draftMessage": {
       return {
         ...state,
-        messages: {
-          ...state.messages,
-          [state.selectedId]: action.message,
+        draftMessages: {
+          ...state.draftMessages,
+          [state.selectedId]: action.draftMessage,
         },
       }
     }
     case "sent_message": {
       return {
         ...state,
-        messages: {
-          ...state.messages,
+        draftMessages: {
+          ...state.draftMessages,
           [state.selectedId]: "",
         },
+        contacts: state.contacts.map((contact) =>
+          contact.id === state.selectedId
+            ? {
+                ...contact,
+                messages: [
+                  ...contact.messages,
+                  {
+                    status: "sent",
+                    timeshtamp: new Date().toISOString(),
+                    // text: state.draftMessages[state.selectedId],
+                    text: action.text,
+                  },
+                ],
+              }
+            : contact
+        ),
       }
     }
     default: {

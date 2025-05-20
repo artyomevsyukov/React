@@ -3,10 +3,11 @@ import Chat from "./Chat.jsx"
 import ContactList from "./ContactList.jsx"
 import { initialState, messengerReducer } from "./messengerReducer"
 import "./styles.css"
+import Messages from "./Messages.jsx"
 
 export default function App6() {
   const [state, dispatch] = useReducer(messengerReducer, initialState)
-  const message = state.messages[state.selectedId]
+  const draftMessage = state.draftMessages[state.selectedId]
 
   useEffect(() => {
     fetchContacts().then((contacts) => {
@@ -25,19 +26,23 @@ export default function App6() {
 
   if (state.isLoading) return <div>Loading...</div>
 
-  //   const selectedContact = contacts.find((c) => c.id === state.selectedId)
   const selectedContact = state.contacts.find((c) => c.id === state.selectedId)
   return (
     <div>
       <ContactList
-        // contacts={contacts}
         contacts={state.contacts}
         selectedId={state.selectedId}
         dispatch={dispatch}
       />
       <Chat
+        // selectedId={state.selectedId}
         key={selectedContact.id}
-        message={message}
+        draftMessage={draftMessage}
+        contact={selectedContact}
+        dispatch={dispatch}
+      />
+      <Messages
+        key={selectedContact.id}
         contact={selectedContact}
         dispatch={dispatch}
       />
