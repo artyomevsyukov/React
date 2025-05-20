@@ -1,4 +1,17 @@
+import { useState } from "react"
+import AddContactPopup from "./AddContactPopup"
+
 export default function ContactList({ contacts, selectedId, dispatch }) {
+  const [showPopup, setShowPopup] = useState(false)
+
+  const handleAddContact = ({ name, email }) => {
+    dispatch({
+      type: "add_contact",
+      name,
+      email,
+    })
+  }
+
   return (
     <section className="contact-list">
       <ul>
@@ -16,6 +29,15 @@ export default function ContactList({ contacts, selectedId, dispatch }) {
           </li>
         ))}
       </ul>
+
+      <button onClick={() => setShowPopup(true)}>Add a new contact</button>
+
+      {showPopup && (
+        <AddContactPopup
+          onSave={handleAddContact}
+          onClose={() => setShowPopup(false)}
+        />
+      )}
     </section>
   )
 }
