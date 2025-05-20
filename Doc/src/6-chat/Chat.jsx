@@ -14,8 +14,7 @@ export default function Chat({ contact, draftMessage, dispatch }) {
       <br />
       <button
         onClick={() => {
-          alert(`Sending "${draftMessage}" to ${contact.email}`)
-          console.log("draftMessage: ", draftMessage)
+          // alert(`Sending "${draftMessage}" to ${contact.email}`)
           dispatch({
             type: "sent_message",
             text: draftMessage,

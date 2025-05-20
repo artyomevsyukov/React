@@ -35,17 +35,12 @@ export default function App6() {
         dispatch={dispatch}
       />
       <Chat
-        // selectedId={state.selectedId}
-        key={selectedContact.id}
+        // key={selectedContact.id}
         draftMessage={draftMessage}
         contact={selectedContact}
         dispatch={dispatch}
       />
-      <Messages
-        key={selectedContact.id}
-        contact={selectedContact}
-        dispatch={dispatch}
-      />
+      <Messages contact={selectedContact} />
     </div>
   )
 }
