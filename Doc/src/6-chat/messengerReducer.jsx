@@ -68,9 +68,10 @@ export function messengerReducer(state, action) {
                   ...contact.messages,
                   {
                     status: "sent",
-                    timeshtamp: new Date().toISOString(),
+                    timestamp: new Date().toISOString(),
                     // text: state.draftMessages[state.selectedId],
                     text: action.text,
+                    id: nanoid(),
                   },
                 ],
               }

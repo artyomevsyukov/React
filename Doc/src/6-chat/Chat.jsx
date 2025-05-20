@@ -1,7 +1,15 @@
-export default function Chat({ contact, draftMessage, dispatch }) {
+import { useRef, useEffect } from "react"
+
+export default function Chat({ contact, draftMessage, dispatch, selectedId }) {
+  useEffect(() => {
+    textareaRef.current?.select()
+  }, [selectedId])
+
+  const textareaRef = useRef(null)
   return (
     <section className="chat">
       <textarea
+        ref={textareaRef}
         value={draftMessage}
         placeholder={"Chat to " + contact.name}
         onChange={(e) => {
@@ -15,10 +23,13 @@ export default function Chat({ contact, draftMessage, dispatch }) {
       <button
         onClick={() => {
           // alert(`Sending "${draftMessage}" to ${contact.email}`)
-          dispatch({
-            type: "sent_message",
-            text: draftMessage,
-          })
+          textareaRef.current.focus()
+          if (draftMessage.length > 0) {
+            dispatch({
+              type: "sent_message",
+              text: draftMessage,
+            })
+          }
         }}>
         Send to {contact.email}
       </button>

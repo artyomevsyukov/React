@@ -5,7 +5,7 @@ const Messages = ({ contact }) => {
       <h1>{contact.name} messages</h1>
       <ul>
         {messages.map((message) => (
-          <Message key={message.text} message={message} />
+          <Message key={message.id} message={message} />
         ))}
       </ul>
     </div>

@@ -36,6 +36,7 @@ export default function App6() {
       />
       <Chat
         // key={selectedContact.id}
+        selectedId={state.selectedId}
         draftMessage={draftMessage}
         contact={selectedContact}
         dispatch={dispatch}
