@@ -53,6 +53,7 @@ export function messengerReducer(state, action) {
         },
       }
     }
+
     case "sent_message": {
       return {
         ...state,
@@ -74,6 +75,21 @@ export function messengerReducer(state, action) {
                     id: nanoid(),
                   },
                 ],
+              }
+            : contact
+        ),
+      }
+    }
+    case "delete_message": {
+      return {
+        ...state,
+        contacts: state.contacts.map((contact) =>
+          contact.id === state.selectedId
+            ? {
+                ...contact,
+                messages: contact.messages.filter(
+                  (message) => message.id !== action.id
+                ),
               }
             : contact
         ),

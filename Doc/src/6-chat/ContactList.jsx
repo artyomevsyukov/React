@@ -14,7 +14,7 @@ export default function ContactList({ contacts, selectedId, dispatch }) {
 
   return (
     <section className="contact-list">
-      <ul>
+      <ul className="contact__list">
         {contacts.map((contact) => (
           <li key={contact.id}>
             <button

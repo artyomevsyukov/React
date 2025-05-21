@@ -8,6 +8,16 @@ import Messages from "./Messages.jsx"
 export default function App6() {
   const [state, dispatch] = useReducer(messengerReducer, initialState)
   const draftMessage = state.draftMessages[state.selectedId]
+  //   console.log("draftMessage: ", draftMessage)
+
+  useEffect(() => {
+    // const selectedContact = state.contacts.find(
+    //   (contact) => contact.id.toString() === state.selectedId.toString()
+    // )
+    console.log("state: ", state)
+    // console.log("selectedContact: ", selectedContact)
+    // console.log("messages: ", selectedContact?.messages)
+  }, [state])
 
   useEffect(() => {
     fetchContacts().then((contacts) => {
@@ -20,29 +30,30 @@ export default function App6() {
     })
   }, [])
 
-  useEffect(() => {
-    console.log("state: ", state)
-  }, [state])
-
   if (state.isLoading) return <div>Loading...</div>
 
   const selectedContact = state.contacts.find((c) => c.id === state.selectedId)
+  console.log("selectedContact: ", selectedContact)
+  console.log("selectedContact-messages: ", selectedContact.messages)
+
   return (
-    <div>
-      <ContactList
-        contacts={state.contacts}
-        selectedId={state.selectedId}
-        dispatch={dispatch}
-      />
-      <Chat
-        // key={selectedContact.id}
-        selectedId={state.selectedId}
-        draftMessage={draftMessage}
-        contact={selectedContact}
-        dispatch={dispatch}
-      />
-      <Messages contact={selectedContact} />
-    </div>
+    <>
+      <div className="top">
+        <ContactList
+          contacts={state.contacts}
+          selectedId={state.selectedId}
+          dispatch={dispatch}
+        />
+        <Chat
+          // key={selectedContact.id}
+          selectedId={state.selectedId}
+          draftMessage={draftMessage}
+          contact={selectedContact}
+          dispatch={dispatch}
+        />
+      </div>
+      <Messages contact={selectedContact} dispatch={dispatch} />
+    </>
   )
 }
 
