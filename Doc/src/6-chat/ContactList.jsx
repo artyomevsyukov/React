@@ -3,6 +3,7 @@ import AddContactPopup from "./AddContactPopup"
 
 export default function ContactList({ contacts, selectedId, dispatch }) {
   const [showPopup, setShowPopup] = useState(false)
+  const [isPopupOpen, setIsPopupOpen] = useState(false)
 
   const handleAddContact = ({ name, email }) => {
     dispatch({
@@ -30,12 +31,13 @@ export default function ContactList({ contacts, selectedId, dispatch }) {
         ))}
       </ul>
 
-      <button onClick={() => setShowPopup(true)}>Add a new contact</button>
+      <button onClick={() => setIsPopupOpen(true)}>Add a new contact</button>
 
-      {showPopup && (
+      {isPopupOpen && (
         <AddContactPopup
+          isOpen={isPopupOpen}
+          onClose={() => setIsPopupOpen(false)}
           onSave={handleAddContact}
-          onClose={() => setShowPopup(false)}
         />
       )}
     </section>
