@@ -6,35 +6,45 @@ import "./styles.css"
 import Messages from "./Messages.jsx"
 
 export default function App6() {
-  const [state, dispatch] = useReducer(messengerReducer, initialState)
-  const draftMessage = state.draftMessages[state.selectedId]
-  //   console.log("draftMessage: ", draftMessage)
+  const [state, dispatch] = useReducer(
+    messengerReducer,
+    initialState,
+    setInitialState
+  )
+  const draftMessage = state?.draftMessages?.[state.selectedId] || ""
+
+  function setInitialState() {
+    try {
+      const savedState = localStorage.getItem("contacts")
+      return savedState
+        ? JSON.parse(savedState)
+        : { ...initialState, isLoading: true }
+    } catch (error) {
+      console.error("Ошибка при загрузке из localStorage:", error)
+      return { ...initialState, isLoading: true }
+    }
+  }
 
   useEffect(() => {
-    // const selectedContact = state.contacts.find(
-    //   (contact) => contact.id.toString() === state.selectedId.toString()
-    // )
-    console.log("state: ", state)
-    // console.log("selectedContact: ", selectedContact)
-    // console.log("messages: ", selectedContact?.messages)
+    localStorage.setItem("contacts", JSON.stringify(state))
   }, [state])
 
   useEffect(() => {
-    fetchContacts().then((contacts) => {
-      setTimeout(() => {
-        dispatch({ type: "contacts_loaded", contacts })
-      }, 2000)
-      if (contacts.length > 0) {
-        dispatch({ type: "changed_selection", contactId: contacts[0].id })
-      }
-    })
-  }, [])
+    if (state.isLoading) {
+      fetchContacts().then((contacts) => {
+        setTimeout(() => {
+          dispatch({ type: "contacts_loaded", contacts })
+        }, 2000)
+        if (contacts.length > 0) {
+          dispatch({ type: "changed_selection", contactId: contacts[0].id })
+        }
+      })
+    }
+  }, [state.isLoading])
 
   if (state.isLoading) return <div>Loading...</div>
 
   const selectedContact = state.contacts.find((c) => c.id === state.selectedId)
-  console.log("selectedContact: ", selectedContact)
-  console.log("selectedContact-messages: ", selectedContact.messages)
 
   return (
     <>
@@ -45,7 +55,6 @@ export default function App6() {
           dispatch={dispatch}
         />
         <Chat
-          // key={selectedContact.id}
           selectedId={state.selectedId}
           draftMessage={draftMessage}
           contact={selectedContact}
@@ -56,12 +65,6 @@ export default function App6() {
     </>
   )
 }
-
-// const contacts = [
-//   { id: 0, name: "Taylor", email: "taylor@mail.com" },
-//   { id: 1, name: "Alice", email: "alice@mail.com" },
-//   { id: 2, name: "Bob", email: "bob@mail.com" },
-// ]
 
 const fetchContacts = async () => [
   { id: 0, name: "Taylor", email: "taylor@mail.com", messages: [] },

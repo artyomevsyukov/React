@@ -2,7 +2,6 @@ import { useState } from "react"
 import AddContactPopup from "./AddContactPopup"
 
 export default function ContactList({ contacts, selectedId, dispatch }) {
-  const [showPopup, setShowPopup] = useState(false)
   const [isPopupOpen, setIsPopupOpen] = useState(false)
 
   const handleAddContact = ({ name, email }) => {
