@@ -1,4 +1,4 @@
-import "./App.css"
+import "./App.scss"
 
 import ThemeProvider from "./context/ThemeProvider"
 import ThemeSwitcher from "./components/ThemeSwitcher"
