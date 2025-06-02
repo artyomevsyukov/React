@@ -26,7 +26,9 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         heroes: state.heroes.filter((hero) => hero.id !== action.payload),
+        heroesLoadingStatus: "idle",
       }
+
     default:
       return state
   }

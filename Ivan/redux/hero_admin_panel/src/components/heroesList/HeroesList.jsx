@@ -31,7 +31,12 @@ const HeroesList = () => {
     // eslint-disable-next-line
   }, [])
 
-  const handleHeroDelete = (id) => dispatch(() => heroDelete(id))
+  const handleHeroDelete = (id) => {
+    // dispatch(heroesFetching())
+    request(`http://localhost:3001/heroes/${id}`, "DELETE")
+      .then(() => dispatch(heroDelete(id)))
+      .catch((error) => console.log("Ошибка удаления", error))
+  }
 
   if (heroesLoadingStatus === "loading") {
     return <Spinner />
