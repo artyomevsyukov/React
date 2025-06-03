@@ -7,19 +7,10 @@ import Spinner from "../spinner/Spinner"
 
 const HeroesList = () => {
   const heroes = useSelector((state) => state.heroes)
-  console.log("heroes: ", heroes)
+  // console.log("heroes: ", heroes)
   const heroesLoadingStatus = useSelector((state) => state.heroesLoadingStatus)
   const dispatch = useDispatch()
   const { request } = useHttp()
-
-  // useEffect(() => {
-  //   dispatch(heroesFetching())
-  //   request("http://localhost:3001/heroes")
-  //     .then((data) => dispatch(heroesFetched(data)))
-  //     .catch(() => dispatch(heroesFetchingError()))
-
-  //   // eslint-disable-next-line
-  // }, [])
 
   const handleHeroDelete = (id) => {
     // dispatch(heroesFetching())

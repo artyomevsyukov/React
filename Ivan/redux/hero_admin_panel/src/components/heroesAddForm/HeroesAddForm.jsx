@@ -2,7 +2,7 @@
 // в общее состояние и отображаться в списке + фильтроваться
 
 import { useHttp } from "../../hooks/http.hook"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addHero } from "../../actions"
 import createHero from "../../utils/createHero"
@@ -16,10 +16,6 @@ const HeroesAddForm = () => {
   const [element, setElement] = useState("")
   const { request } = useHttp()
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    console.log("filters: ", filters)
-  }, [filters])
 
   const handleAddHero = (hero) => {
     request(`http://localhost:3001/heroes`, "POST", JSON.stringify(hero), {

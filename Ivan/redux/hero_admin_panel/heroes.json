@@ -16,23 +16,28 @@
   "filters": [
     {
       "id": "1",
-      "name": "all"
+      "name": "all",
+      "active": "true"
     },
     {
       "id": "2",
-      "name": "fire"
+      "name": "fire",
+      "active": "false"
     },
     {
       "id": "3",
-      "name": "water"
+      "name": "water",
+      "active": "false"
     },
     {
       "id": "4",
-      "name": "wind"
+      "name": "wind",
+      "active": "false"
     },
     {
       "id": "5",
-      "name": "earth"
+      "name": "earth",
+      "active": "false"
     }
   ]
 }
