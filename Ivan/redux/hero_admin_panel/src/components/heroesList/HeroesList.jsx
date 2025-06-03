@@ -11,11 +11,6 @@ import {
 import HeroesListItem from "../heroesListItem/HeroesListItem"
 import Spinner from "../spinner/Spinner"
 
-// Задача для этого компонента:
-// При клике на "крестик" идет удаление персонажа из общего состояния
-// Усложненная задача:
-// Удаление идет и с json файла при помощи метода DELETE
-
 const HeroesList = () => {
   const heroes = useSelector((state) => state.heroes)
   const heroesLoadingStatus = useSelector((state) => state.heroesLoadingStatus)
@@ -30,6 +25,8 @@ const HeroesList = () => {
 
     // eslint-disable-next-line
   }, [])
+
+  console.log("DATA: ", heroes)
 
   const handleHeroDelete = (id) => {
     // dispatch(heroesFetching())
