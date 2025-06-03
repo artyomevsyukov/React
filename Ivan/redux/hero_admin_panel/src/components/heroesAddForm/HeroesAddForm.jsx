@@ -1,25 +1,39 @@
-// Задача для этого компонента:
 // Реализовать создание нового героя с введенными данными. Он должен попадать
 // в общее состояние и отображаться в списке + фильтроваться
-// Уникальный идентификатор персонажа можно сгенерировать через uiid
-// Усложненная задача:
-// Персонаж создается и в файле json при помощи метода POST
-// Дополнительно:
-// Элементы <option></option> желательно сформировать на базе
-// данных из фильтров
 
 import { useHttp } from "../../hooks/http.hook"
-import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { addHero } from "../../actions"
 import createHero from "../../utils/createHero"
+// import {
+//   filtersFetching,
+//   filtersFetched,
+//   filtersFetchingError,
+// } from "../../actions"
+import getElementName from "../../utils/getElementName"
 
 const HeroesAddForm = () => {
+  const filters = useSelector((state) => state.filters)
+
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [element, setElement] = useState("")
-  const dispatch = useDispatch()
   const { request } = useHttp()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    console.log("filters: ", filters)
+  }, [filters])
+
+  // useEffect(() => {
+  //   dispatch(filtersFetching())
+  //   request("http://localhost:3001/filters")
+  //     .then((data) => dispatch(filtersFetched(data)))
+  //     .catch(() => dispatch(filtersFetchingError()))
+
+  //   // eslint-disable-next-line
+  // }, [])
 
   const handleAddHero = (hero) => {
     request(`http://localhost:3001/heroes`, "POST", JSON.stringify(hero), {
@@ -85,11 +99,28 @@ const HeroesAddForm = () => {
           className="form-select"
           id="element"
           name="element">
-          <option>Я владею элементом...</option>
-          <option value="fire">Огонь</option>
+          <option value="">Я владею элементом...</option>
+          {/* <option value="fire">Огонь</option>
           <option value="water">Вода</option>
           <option value="wind">Ветер</option>
-          <option value="earth">Земля</option>
+          <option value="earth">Земля</option> */}
+          {filters
+            .filter((filter) => filter.name !== "all")
+            .map((filter) => (
+              <option key={filter.id} value={filter.name}>
+                {getElementName(filter.name)}
+              </option>
+            ))}
+          {/* {filters.map((filter) => {
+            if (filter.name === "all") {
+              return null 
+            }
+            return (
+              <option key={filter.id} value={filter.name}>
+                {getElementName(filter.name)}
+              </option>
+            )
+          })} */}
         </select>
       </div>
 
