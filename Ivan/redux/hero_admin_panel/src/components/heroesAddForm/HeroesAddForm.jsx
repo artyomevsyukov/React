@@ -6,11 +6,6 @@ import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addHero } from "../../actions"
 import createHero from "../../utils/createHero"
-// import {
-//   filtersFetching,
-//   filtersFetched,
-//   filtersFetchingError,
-// } from "../../actions"
 import getElementName from "../../utils/getElementName"
 
 const HeroesAddForm = () => {
@@ -25,15 +20,6 @@ const HeroesAddForm = () => {
   useEffect(() => {
     console.log("filters: ", filters)
   }, [filters])
-
-  // useEffect(() => {
-  //   dispatch(filtersFetching())
-  //   request("http://localhost:3001/filters")
-  //     .then((data) => dispatch(filtersFetched(data)))
-  //     .catch(() => dispatch(filtersFetchingError()))
-
-  //   // eslint-disable-next-line
-  // }, [])
 
   const handleAddHero = (hero) => {
     request(`http://localhost:3001/heroes`, "POST", JSON.stringify(hero), {
