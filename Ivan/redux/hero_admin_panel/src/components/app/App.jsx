@@ -20,16 +20,45 @@ const App = () => {
   const { request } = useHttp()
 
   useEffect(() => {
-    dispatch(filtersFetching())
-    request("http://localhost:3001/filters")
-      .then((data) => dispatch(filtersFetched(data)))
-      .catch(() => dispatch(filtersFetchingError()))
+    const loadData = async () => {
+      try {
+        dispatch(filtersFetching())
+        dispatch(heroesFetching())
 
-    dispatch(heroesFetching())
-    request("http://localhost:3001/heroes")
-      .then((data) => dispatch(heroesFetched(data)))
-      .catch(() => dispatch(heroesFetchingError()))
+        // await new Promise((resolve) => setTimeout(resolve, 2000))
+
+        const [filters, heroes] = await Promise.all([
+          request("http://localhost:3001/filters"),
+          request("http://localhost:3001/heroes"),
+        ])
+
+        dispatch(filtersFetched(filters))
+        dispatch(heroesFetched(heroes))
+      } catch (error) {
+        dispatch(filtersFetchingError())
+        dispatch(heroesFetchingError())
+      }
+    }
+
+    loadData()
   }, [])
+
+  // useEffect(() => {
+  //   dispatch(filtersFetching())
+  //   dispatch(heroesFetching())
+
+  //   setTimeout(() => {
+  //     Promise.all([
+  //       request("http://localhost:3001/filters")
+  //         .then((data) => dispatch(filtersFetched(data)))
+  //         .catch(() => dispatch(filtersFetchingError())),
+
+  //       request("http://localhost:3001/heroes")
+  //         .then((data) => dispatch(heroesFetched(data)))
+  //         .catch(() => dispatch(heroesFetchingError())),
+  //     ])
+  //   }, 3000)
+  // }, [])
 
   return (
     <main className="app">

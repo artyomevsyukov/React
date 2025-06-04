@@ -1,5 +1,3 @@
-// import createHero from "../utils/createHero"
-
 const initialState = {
   heroes: [],
   heroesLoadingStatus: "idle",
@@ -8,6 +6,8 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
+  console.log("Current state:", state)
+
   switch (action.type) {
     case "HEROES_FETCHING":
       return {
@@ -31,11 +31,6 @@ const reducer = (state = initialState, action) => {
         heroes: state.heroes.filter((hero) => hero.id !== action.payload),
         heroesLoadingStatus: "idle",
       }
-    // case "ADD_HERO":
-    //   return {
-    //     ...state,
-    //     heroes: [...state.heroes, createHero(action.payload)],
-    //   }
     case "ADD_HERO":
       return {
         ...state,

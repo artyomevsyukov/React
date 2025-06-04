@@ -8,15 +8,29 @@ import { useSelector } from "react-redux"
 import CN from "classnames"
 import { getButtonVariant } from "../../utils/getButtonVariant"
 import getElementName from "../../utils/getElementName"
+import Spinner from "../spinner/Spinner"
 // import { useEffect } from "react"
 
 const HeroesFilters = () => {
   const filters = useSelector((state) => state.filters)
+  const filtersLoadingStatus = useSelector(
+    (state) => state.filtersLoadingStatus
+  )
   // useEffect(() => {
   //   console.log("filters: ", filters)
   // }, [filters])
 
   console.log("filters: ", filters)
+
+  if (filtersLoadingStatus === "loading") {
+    return (
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Spinner />
+      </div>
+    )
+  } else if (filtersLoadingStatus === "error") {
+    return <h5 className="text-center mt-5">Ошибка загрузки</h5>
+  }
 
   return (
     <div className="card shadow-lg mt-4">
@@ -26,6 +40,7 @@ const HeroesFilters = () => {
           {filters.map((filter) => {
             return (
               <button
+                key={filter.id}
                 // className={filterClass}>
                 className={CN("btn", `btn-${getButtonVariant(filter.name)}`, {
                   active: filter.active === "true",
