@@ -1,7 +1,7 @@
 import { useHttp } from "../../hooks/http.hook"
 import { useDispatch, useSelector } from "react-redux"
 
-import { heroDelete } from "../../actions"
+import { heroDelete } from "../../actions/actionCreators"
 import HeroesListItem from "../heroesListItem/HeroesListItem"
 import Spinner from "../spinner/Spinner"
 

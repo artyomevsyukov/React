@@ -12,7 +12,7 @@ import {
   heroesFetching,
   heroesFetched,
   heroesFetchingError,
-} from "../../actions"
+} from "../../actions/actionCreators"
 import "./app.scss"
 
 const App = () => {

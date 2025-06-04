@@ -9,18 +9,18 @@ import CN from "classnames"
 import { getButtonVariant } from "../../utils/getButtonVariant"
 import getElementName from "../../utils/getElementName"
 import Spinner from "../spinner/Spinner"
-// import { useEffect } from "react"
+import { useEffect } from "react"
 
 const HeroesFilters = () => {
   const filters = useSelector((state) => state.filters)
   const filtersLoadingStatus = useSelector(
     (state) => state.filtersLoadingStatus
   )
-  // useEffect(() => {
-  //   console.log("filters: ", filters)
-  // }, [filters])
+  useEffect(() => {
+    console.log("filters: ", filters)
+  }, [filters])
 
-  console.log("filters: ", filters)
+  // console.log("filters: ", filters)
 
   if (filtersLoadingStatus === "loading") {
     return (
@@ -30,6 +30,17 @@ const HeroesFilters = () => {
     )
   } else if (filtersLoadingStatus === "error") {
     return <h5 className="text-center mt-5">Ошибка загрузки</h5>
+  }
+
+  const handlerFilter = (id) => {
+    filters.map((filter) => {
+      if (filter.id !== id) {
+        return { ...filter, active: "false" }
+      } else {
+        return { ...filter, active: "true" }
+      }
+    })
+    console.log("filter")
   }
 
   return (
@@ -42,6 +53,7 @@ const HeroesFilters = () => {
               <button
                 key={filter.id}
                 // className={filterClass}>
+                onClick={() => handlerFilter(filter.id)}
                 className={CN("btn", `btn-${getButtonVariant(filter.name)}`, {
                   active: filter.active === "true",
                 })}>

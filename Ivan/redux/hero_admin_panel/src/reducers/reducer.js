@@ -1,3 +1,5 @@
+import * as actionType from "../actions/actionTypes"
+
 const initialState = {
   heroes: [],
   heroesLoadingStatus: "idle",
@@ -6,48 +8,48 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
-  console.log("Current state:", state)
+  // console.log("Current state:", state)
 
   switch (action.type) {
-    case "HEROES_FETCHING":
+    case actionType.HEROES_FETCHING:
       return {
         ...state,
         heroesLoadingStatus: "loading",
       }
-    case "HEROES_FETCHED":
+    case actionType.HEROES_FETCHED:
       return {
         ...state,
         heroes: action.payload,
         heroesLoadingStatus: "idle",
       }
-    case "HEROES_FETCHING_ERROR":
+    case actionType.HEROES_FETCHING_ERROR:
       return {
         ...state,
         heroesLoadingStatus: "error",
       }
-    case "HERO_DELETE":
+    case actionType.HERO_DELETE:
       return {
         ...state,
         heroes: state.heroes.filter((hero) => hero.id !== action.payload),
         heroesLoadingStatus: "idle",
       }
-    case "ADD_HERO":
+    case actionType.ADD_HERO:
       return {
         ...state,
         heroes: [...state.heroes, action.payload],
       }
-    case "FILTERS_FETCHING":
+    case actionType.FILTERS_FETCHING:
       return {
         ...state,
         filtersLoadingStatus: "loading",
       }
-    case "FILTERS_FETCHED":
+    case actionType.FILTERS_FETCHED:
       return {
         ...state,
         filters: action.payload,
         filtersLoadingStatus: "idle",
       }
-    case "FILTERS_FETCHING_ERROR":
+    case actionType.FILTERS_FETCHING_ERROR:
       return {
         ...state,
         filtersLoadingStatus: "error",

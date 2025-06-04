@@ -4,7 +4,7 @@
 import { useHttp } from "../../hooks/http.hook"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { addHero } from "../../actions"
+import { addHero } from "../../actions/actionCreators"
 import createHero from "../../utils/createHero"
 import getElementName from "../../utils/getElementName"
 
