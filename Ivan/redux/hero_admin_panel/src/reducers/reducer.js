@@ -5,10 +5,11 @@ const initialState = {
   heroesLoadingStatus: "idle",
   filters: [],
   filtersLoadingStatus: "idle",
+  activeFilter: "all",
 }
 
 const reducer = (state = initialState, action) => {
-  console.log("Current state:", state)
+  // console.log("Current state:", state)
 
   switch (action.type) {
     case actionType.HEROES_FETCHING:
@@ -54,15 +55,19 @@ const reducer = (state = initialState, action) => {
         ...state,
         filtersLoadingStatus: "error",
       }
-    case actionType.UPDATE_FILTER:
+
+    case actionType.SET_ACTIVE_FILTER:
+      console.log("action.payload: ", action.payload)
+
       return {
         ...state,
         filters: state.filters.map((filter) => {
           return {
             ...filter,
-            active: filter.id === action.payload ? true : false,
+            active: filter.id === action.payload.filterId ? true : false,
           }
         }),
+        activeFilter: action.payload.filterName,
       }
 
     default:

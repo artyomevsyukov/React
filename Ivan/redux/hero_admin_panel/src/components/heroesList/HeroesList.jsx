@@ -1,13 +1,14 @@
 import { useHttp } from "../../hooks/http.hook"
 import { useDispatch, useSelector } from "react-redux"
-
 import { heroDelete } from "../../actions/actionCreators"
 import HeroesListItem from "../heroesListItem/HeroesListItem"
 import Spinner from "../spinner/Spinner"
 
 const HeroesList = () => {
+  console.log("render HeroesList")
   const heroes = useSelector((state) => state.heroes)
-  // console.log("heroes: ", heroes)
+  const activeFilter = useSelector((state) => state.activeFilter)
+
   const heroesLoadingStatus = useSelector((state) => state.heroesLoadingStatus)
   const dispatch = useDispatch()
   const { request } = useHttp()
@@ -41,7 +42,13 @@ const HeroesList = () => {
     })
   }
 
-  const elements = renderHeroesList(heroes)
+  const filteredHeroes = (heroes) => {
+    if (activeFilter === "all") return heroes
+
+    return heroes.filter((hero) => hero.element === activeFilter)
+  }
+
+  const elements = renderHeroesList(filteredHeroes(heroes))
   return <ul>{elements}</ul>
 }
 
