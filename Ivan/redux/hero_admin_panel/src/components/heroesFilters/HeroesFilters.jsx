@@ -4,14 +4,16 @@
 // Активный фильтр имеет класс active
 // Изменять json-файл для удобства МОЖНО!
 // Представьте, что вы попросили бэкенд-разработчика об этом
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import CN from "classnames"
 import { getButtonVariant } from "../../utils/getButtonVariant"
 import getElementName from "../../utils/getElementName"
 import Spinner from "../spinner/Spinner"
 import { useEffect } from "react"
+import { updateFilter } from "../../actions/actionCreators"
 
 const HeroesFilters = () => {
+  const dispatch = useDispatch()
   const filters = useSelector((state) => state.filters)
   const filtersLoadingStatus = useSelector(
     (state) => state.filtersLoadingStatus
@@ -33,13 +35,7 @@ const HeroesFilters = () => {
   }
 
   const handlerFilter = (id) => {
-    filters.map((filter) => {
-      if (filter.id !== id) {
-        return { ...filter, active: "false" }
-      } else {
-        return { ...filter, active: "true" }
-      }
-    })
+    dispatch(updateFilter(id))
     console.log("filter")
   }
 
@@ -55,7 +51,7 @@ const HeroesFilters = () => {
                 // className={filterClass}>
                 onClick={() => handlerFilter(filter.id)}
                 className={CN("btn", `btn-${getButtonVariant(filter.name)}`, {
-                  active: filter.active === "true",
+                  active: filter.active,
                 })}>
                 {getElementName(filter.name)}
               </button>

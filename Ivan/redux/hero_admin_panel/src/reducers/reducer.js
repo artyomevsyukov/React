@@ -8,7 +8,7 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
-  // console.log("Current state:", state)
+  console.log("Current state:", state)
 
   switch (action.type) {
     case actionType.HEROES_FETCHING:
@@ -53,6 +53,16 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         filtersLoadingStatus: "error",
+      }
+    case actionType.UPDATE_FILTER:
+      return {
+        ...state,
+        filters: state.filters.map((filter) => {
+          return {
+            ...filter,
+            active: filter.id === action.payload ? true : false,
+          }
+        }),
       }
 
     default:
