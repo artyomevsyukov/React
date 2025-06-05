@@ -25,7 +25,7 @@ const App = () => {
         dispatch(filtersFetching())
         dispatch(heroesFetching())
 
-        await new Promise((resolve) => setTimeout(resolve, 2000))
+        // await new Promise((resolve) => setTimeout(resolve, 2000))
 
         const [filters, heroes] = await Promise.all([
           request("http://localhost:3001/filters"),

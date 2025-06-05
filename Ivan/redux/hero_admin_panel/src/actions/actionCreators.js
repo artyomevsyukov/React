@@ -52,9 +52,9 @@ export const filtersFetchingError = () => {
   }
 }
 
-export const setActiveFilter = (FilterName) => {
+export const setActiveFilter = (filterData) => {
   return {
     type: actions.SET_ACTIVE_FILTER,
-    payload: FilterName,
+    payload: filterData,
   }
 }
