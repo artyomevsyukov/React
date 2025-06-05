@@ -1,24 +1,31 @@
 {
   "heroes": [
     {
-      "id": "bdba800b-4a8d-4182-ac05-a2b7a647cce7",
-      "name": "sdfsdfs",
-      "description": "adfsdfsdf",
+      "id": "25cf1391-335d-4600-9a63-20229756d7b0",
+      "name": "123",
+      "description": "123",
       "element": "fire"
     },
     {
-      "id": "cfabb6d8-8db6-4630-a874-388fad3f3efe",
-      "name": "1231",
-      "description": "312",
+      "id": "8de58486-106a-43d4-87c8-25368cf1eabb",
+      "name": "sdfsdf",
+      "description": "sdfasdsdf",
       "element": "water"
     },
     {
-      "id": "9fe734d4-f177-498f-beb2-936e5f5bd0ac",
-      "name": "sdfsfsdf",
-      "description": "sfsdf",
-      "element": "fire"
+      "id": "50c89018-112e-4cd0-bad8-b57745218f1e",
+      "name": "adsfasd",
+      "description": "fwefwefw",
+      "element": "wind"
+    },
+    {
+      "id": "632f6127-715f-432b-be14-11215d0dd0e6",
+      "name": "ewghdfhg",
+      "description": "edghaerger",
+      "element": "earth"
     }
   ],
+  "heroesLoadingStatus": "idle",
   "filters": [
     {
       "id": "1",
@@ -45,5 +52,7 @@
       "name": "earth",
       "active": false
     }
-  ]
+  ],
+  "filtersLoadingStatus": "idle",
+  "activeFilter": "all"
 }

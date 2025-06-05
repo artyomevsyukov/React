@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { heroDelete } from "../../actions/actionCreators"
 import HeroesListItem from "../heroesListItem/HeroesListItem"
 import Spinner from "../spinner/Spinner"
+import { useCallback } from "react"
 
 const HeroesList = () => {
-  console.log("render HeroesList")
   const heroes = useSelector((state) => state.heroes)
   const activeFilter = useSelector((state) => state.activeFilter)
 
@@ -13,12 +13,23 @@ const HeroesList = () => {
   const dispatch = useDispatch()
   const { request } = useHttp()
 
-  const handleHeroDelete = (id) => {
-    // dispatch(heroesFetching())
-    request(`http://localhost:3001/heroes/${id}`, "DELETE")
-      .then(() => dispatch(heroDelete(id)))
-      .catch((error) => console.log("Ошибка удаления", error))
-  }
+  // const handleHeroDelete = (id) => {
+  //   request(`http://localhost:3001/heroes/${id}`, "DELETE")
+  //     .then(() => dispatch(heroDelete(id)))
+  //     .catch((error) => console.log("Ошибка удаления", error))
+  // }
+
+  const handleHeroDelete = useCallback(
+    async (id) => {
+      try {
+        await request(`http://localhost:3001/heroes/${id}`, "DELETE")
+        dispatch(heroDelete(id))
+      } catch (error) {
+        console.error("Ошибка удаления", error)
+      }
+    },
+    [request, dispatch]
+  )
 
   if (heroesLoadingStatus === "loading") {
     return <Spinner />

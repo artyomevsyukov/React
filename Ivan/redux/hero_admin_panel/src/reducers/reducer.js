@@ -57,8 +57,6 @@ const reducer = (state = initialState, action) => {
       }
 
     case actionType.SET_ACTIVE_FILTER:
-      console.log("action.payload: ", action.payload)
-
       return {
         ...state,
         filters: state.filters.map((filter) => {

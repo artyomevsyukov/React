@@ -25,7 +25,7 @@ const App = () => {
         dispatch(filtersFetching())
         dispatch(heroesFetching())
 
-        // await new Promise((resolve) => setTimeout(resolve, 2000))
+        await new Promise((resolve) => setTimeout(resolve, 2000))
 
         const [filters, heroes] = await Promise.all([
           request("http://localhost:3001/filters"),
@@ -35,6 +35,7 @@ const App = () => {
         dispatch(filtersFetched(filters))
         dispatch(heroesFetched(heroes))
       } catch (error) {
+        console.log("Error: ", error.message)
         dispatch(filtersFetchingError())
         dispatch(heroesFetchingError())
       }

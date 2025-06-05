@@ -6,7 +6,6 @@ import Spinner from "../spinner/Spinner"
 import { setActiveFilter } from "../../actions/actionCreators"
 
 const HeroesFilters = () => {
-  console.log("render HeroesFilters")
   const dispatch = useDispatch()
   const filters = useSelector((state) => state.filters)
   const filtersLoadingStatus = useSelector(
@@ -27,24 +26,30 @@ const HeroesFilters = () => {
     dispatch(setActiveFilter({ filterId, filterName }))
   }
 
+  const renderFilter = (arr) => {
+    return arr.map((filter) => {
+      const btnClass = CN("btn", `btn-${getButtonVariant(filter.name)}`, {
+        active: filter.active,
+      })
+
+      return (
+        <button
+          key={filter.id}
+          onClick={() => handlerFilter(filter.id, filter.name)}
+          className={btnClass}>
+          {getElementName(filter.name)}
+        </button>
+      )
+    })
+  }
+
+  const elementes = renderFilter(filters)
+
   return (
     <div className="card shadow-lg mt-4">
       <div className="card-body">
         <p className="card-text">Отфильтруйте героев по элементам</p>
-        <div className="btn-group">
-          {filters.map((filter) => {
-            return (
-              <button
-                key={filter.id}
-                onClick={() => handlerFilter(filter.id, filter.name)}
-                className={CN("btn", `btn-${getButtonVariant(filter.name)}`, {
-                  active: filter.active,
-                })}>
-                {getElementName(filter.name)}
-              </button>
-            )
-          })}
-        </div>
+        <div className="btn-group">{elementes}</div>
       </div>
     </div>
   )
