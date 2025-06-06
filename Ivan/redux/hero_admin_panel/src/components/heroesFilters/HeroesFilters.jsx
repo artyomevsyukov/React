@@ -3,14 +3,16 @@ import CN from "classnames"
 import { getButtonVariant } from "../../utils/getButtonVariant"
 import getElementName from "../../utils/getElementName"
 import Spinner from "../spinner/Spinner"
-import { setActiveFilter } from "../../actions/actionCreators"
-
+import {
+  selectFilters,
+  setActiveFilter,
+  selectFiltersLoadingStatus,
+} from "../../redux/slices/filtersSlice"
 const HeroesFilters = () => {
   const dispatch = useDispatch()
-  const filters = useSelector((state) => state.filters)
-  const filtersLoadingStatus = useSelector(
-    (state) => state.filtersLoadingStatus
-  )
+
+  const filters = useSelector(selectFilters)
+  const filtersLoadingStatus = useSelector(selectFiltersLoadingStatus)
 
   if (filtersLoadingStatus === "loading") {
     return (

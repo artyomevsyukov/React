@@ -5,14 +5,18 @@ import HeroesList from "../heroesList/HeroesList"
 import HeroesAddForm from "../heroesAddForm/HeroesAddForm"
 import HeroesFilters from "../heroesFilters/HeroesFilters"
 import { useHttp } from "../../hooks/http.hook"
+
 import {
   filtersFetching,
   filtersFetched,
   filtersFetchingError,
+} from "../../redux/slices/filtersSlice"
+import {
   heroesFetching,
   heroesFetched,
   heroesFetchingError,
-} from "../../actions/actionCreators"
+} from "../../redux/slices/heroesSlice"
+
 import "./app.scss"
 
 const App = () => {

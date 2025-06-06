@@ -1,15 +1,13 @@
-// Реализовать создание нового героя с введенными данными. Он должен попадать
-// в общее состояние и отображаться в списке + фильтроваться
-
 import { useHttp } from "../../hooks/http.hook"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { addHero } from "../../actions/actionCreators"
+import { addHero } from "../../redux/slices/heroesSlice"
+import { selectFilters } from "../../redux/slices/filtersSlice"
 import createHero from "../../utils/createHero"
 import getElementName from "../../utils/getElementName"
 
 const HeroesAddForm = () => {
-  const filters = useSelector((state) => state.filters)
+  const filters = useSelector(selectFilters)
 
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
@@ -27,7 +25,7 @@ const HeroesAddForm = () => {
         setDescription("")
         setElement("")
       })
-      .catch((error) => console.log("Ошибка удаления", error))
+      .catch((error) => console.log("Ошибка создания героя", error))
   }
 
   const handleSubmit = (e) => {
@@ -82,27 +80,13 @@ const HeroesAddForm = () => {
           id="element"
           name="element">
           <option value="">Я владею элементом...</option>
-          {/* <option value="fire">Огонь</option>
-          <option value="water">Вода</option>
-          <option value="wind">Ветер</option>
-          <option value="earth">Земля</option> */}
           {filters
-            .filter((filter) => filter.name !== "all")
+            ?.filter((filter) => filter.name !== "all")
             .map((filter) => (
               <option key={filter.id} value={filter.name}>
                 {getElementName(filter.name)}
               </option>
             ))}
-          {/* {filters.map((filter) => {
-            if (filter.name === "all") {
-              return null 
-            }
-            return (
-              <option key={filter.id} value={filter.name}>
-                {getElementName(filter.name)}
-              </option>
-            )
-          })} */}
         </select>
       </div>
 

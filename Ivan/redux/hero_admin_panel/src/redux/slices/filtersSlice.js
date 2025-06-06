@@ -31,6 +31,7 @@ const filtersSlice = createSlice({
 })
 
 export const selectFilters = (state) => state.filters.filters
+export const selectActiveFilter = (state) => state.filters.activeFilter
 export const selectFiltersLoadingStatus = (state) =>
   state.filters.filtersLoadingStatus
 

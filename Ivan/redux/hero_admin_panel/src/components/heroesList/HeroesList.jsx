@@ -1,23 +1,21 @@
 import { useHttp } from "../../hooks/http.hook"
 import { useDispatch, useSelector } from "react-redux"
-import { heroDelete } from "../../actions/actionCreators"
+import {
+  heroDelete,
+  selectHeroes,
+  selectHeroesLoadingStatus,
+} from "../../redux/slices/heroesSlice"
 import HeroesListItem from "../heroesListItem/HeroesListItem"
 import Spinner from "../spinner/Spinner"
 import { useCallback } from "react"
+import { selectActiveFilter } from "../../redux/slices/filtersSlice"
 
 const HeroesList = () => {
-  const heroes = useSelector((state) => state.heroes)
-  const activeFilter = useSelector((state) => state.activeFilter)
-
-  const heroesLoadingStatus = useSelector((state) => state.heroesLoadingStatus)
+  const heroes = useSelector(selectHeroes)
+  const activeFilter = useSelector(selectActiveFilter)
+  const heroesLoadingStatus = useSelector(selectHeroesLoadingStatus)
   const dispatch = useDispatch()
   const { request } = useHttp()
-
-  // const handleHeroDelete = (id) => {
-  //   request(`http://localhost:3001/heroes/${id}`, "DELETE")
-  //     .then(() => dispatch(heroDelete(id)))
-  //     .catch((error) => console.log("Ошибка удаления", error))
-  // }
 
   const handleHeroDelete = useCallback(
     async (id) => {
@@ -38,24 +36,22 @@ const HeroesList = () => {
   }
 
   const renderHeroesList = (arr) => {
-    if (arr.length === 0) {
+    if (!arr || arr.length === 0) {
       return <h5 className="text-center mt-5">Героев пока нет</h5>
     }
 
-    return arr.map(({ id, ...props }) => {
-      return (
-        <HeroesListItem
-          key={id}
-          handleHeroDelete={() => handleHeroDelete(id)}
-          {...props}
-        />
-      )
-    })
+    return arr.map(({ id, ...props }) => (
+      <HeroesListItem
+        key={id}
+        handleHeroDelete={() => handleHeroDelete(id)}
+        {...props}
+      />
+    ))
   }
 
   const filteredHeroes = (heroes) => {
+    if (!heroes || heroes.length === 0) return []
     if (activeFilter === "all") return heroes
-
     return heroes.filter((hero) => hero.element === activeFilter)
   }
 
