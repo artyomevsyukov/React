@@ -17,6 +17,12 @@
       "name": "sfadfsf",
       "description": "sdfsfsd",
       "element": "water"
+    },
+    {
+      "id": "6db3c2f6-c723-4435-afc7-3e0387ffac34",
+      "name": "sdfsd",
+      "description": "fsdfsdf",
+      "element": "water"
     }
   ],
   "heroesLoadingStatus": "idle",

@@ -4,49 +4,44 @@ import { useDispatch } from "react-redux"
 import HeroesList from "../heroesList/HeroesList"
 import HeroesAddForm from "../heroesAddForm/HeroesAddForm"
 import HeroesFilters from "../heroesFilters/HeroesFilters"
-import { useHttp } from "../../hooks/http.hook"
 
-import {
-  filtersFetching,
-  filtersFetched,
-  filtersFetchingError,
-} from "../../redux/slices/filtersSlice"
-import {
-  heroesFetching,
-  heroesFetched,
-  heroesFetchingError,
-} from "../../redux/slices/heroesSlice"
+import { fetchFilters } from "../../redux/slices/filtersSlice"
+import { fetchHeroes } from "../../redux/slices/heroesSlice"
 
 import "./app.scss"
 
 const App = () => {
   const dispatch = useDispatch()
-  const { request } = useHttp()
 
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        dispatch(filtersFetching())
-        dispatch(heroesFetching())
-
-        // await new Promise((resolve) => setTimeout(resolve, 2000))
-
-        const [filters, heroes] = await Promise.all([
-          request("http://localhost:3001/filters"),
-          request("http://localhost:3001/heroes"),
-        ])
-
-        dispatch(filtersFetched(filters))
-        dispatch(heroesFetched(heroes))
-      } catch (error) {
-        console.log("Error: ", error.message)
-        dispatch(filtersFetchingError())
-        dispatch(heroesFetchingError())
-      }
-    }
-
-    loadData()
+    dispatch(fetchFilters())
+    dispatch(fetchHeroes())
   }, [])
+
+  // useEffect(() => {
+  //   const loadData = async () => {
+  //     try {
+  //       dispatch(filtersFetching())
+  //       dispatch(heroesFetching())
+
+  //       // await new Promise((resolve) => setTimeout(resolve, 2000))
+
+  //       const [filters, heroes] = await Promise.all([
+  //         request("http://localhost:3001/filters"),
+  //         request("http://localhost:3001/heroes"),
+  //       ])
+
+  //       dispatch(filtersFetched(filters))
+  //       dispatch(heroesFetched(heroes))
+  //     } catch (error) {
+  //       console.log("Error: ", error.message)
+  //       dispatch(filtersFetchingError())
+  //       dispatch(heroesFetchingError())
+  //     }
+  //   }
+
+  //   loadData()
+  // }, [])
 
   // useEffect(() => {
   //   dispatch(filtersFetching())
