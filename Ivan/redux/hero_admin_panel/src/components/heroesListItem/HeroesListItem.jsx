@@ -1,6 +1,15 @@
-import heroImage from "../../assets/hero.png"
+import React from "react"
 
-const HeroesListItem = ({ name, description, element, handleHeroDelete }) => {
+// import heroImage from "../../assets/hero.png"
+import heroImage from "/hero.png"
+
+const HeroesListItem = ({
+  id,
+  name,
+  description,
+  element,
+  handleHeroDelete,
+}) => {
   let elementClassName
 
   switch (element) {
@@ -27,6 +36,7 @@ const HeroesListItem = ({ name, description, element, handleHeroDelete }) => {
       <img
         // src="https://e7.pngegg.com/pngimages/491/220/png-clipart-woman-question-mark-mysterious-people-woman.png"
         src={heroImage}
+        // src="/hero.png"
         className="img-fluid w-25 d-inline"
         alt="unknown hero"
         style={{ objectFit: "cover" }}
@@ -40,10 +50,10 @@ const HeroesListItem = ({ name, description, element, handleHeroDelete }) => {
           type="button"
           className="btn-close btn-close"
           aria-label="Close"
-          onClick={handleHeroDelete}></button>
+          onClick={() => handleHeroDelete(id)}></button>
       </span>
     </li>
   )
 }
 
-export default HeroesListItem
+export default React.memo(HeroesListItem)

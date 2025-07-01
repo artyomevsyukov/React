@@ -45,13 +45,13 @@ const HeroesFilters = () => {
     })
   }
 
-  const elementes = renderFilter(filters)
+  const elements = renderFilter(filters)
 
   return (
     <div className="card shadow-lg mt-4">
       <div className="card-body">
         <p className="card-text">Отфильтруйте героев по элементам</p>
-        <div className="btn-group">{elementes}</div>
+        <div className="btn-group">{elements}</div>
       </div>
     </div>
   )

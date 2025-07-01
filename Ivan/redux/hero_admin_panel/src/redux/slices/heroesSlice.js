@@ -15,16 +15,16 @@ const heroesSlice = createSlice({
   name: "heroes",
   initialState,
   reducers: {
-    heroesFetching: (state) => {
-      state.heroesLoadingStatus = "loading"
-    },
-    heroesFetched: (state, action) => {
-      state.heroes = action.payload
-      state.heroesLoadingStatus = "idle"
-    },
-    heroesFetchingError: (state) => {
-      state.heroesLoadingStatus = "error"
-    },
+    // heroesFetching: (state) => {
+    //   state.heroesLoadingStatus = "loading"
+    // },
+    // heroesFetched: (state, action) => {
+    //   state.heroes = action.payload
+    //   state.heroesLoadingStatus = "idle"
+    // },
+    // heroesFetchingError: (state) => {
+    //   state.heroesLoadingStatus = "error"
+    // },
     addHero: (state, action) => {
       state.heroes.push(action.payload)
     },
@@ -52,9 +52,9 @@ export const selectHeroesLoadingStatus = (state) =>
   state.heroes.heroesLoadingStatus
 
 export const {
-  heroesFetching,
-  heroesFetched,
-  heroesFetchingError,
+  // heroesFetching,
+  // heroesFetched,
+  // heroesFetchingError,
   addHero,
   heroDelete,
 } = heroesSlice.actions

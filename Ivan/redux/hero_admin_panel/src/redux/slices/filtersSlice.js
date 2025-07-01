@@ -47,10 +47,5 @@ export const selectActiveFilter = (state) => state.filters.activeFilter
 export const selectFiltersLoadingStatus = (state) =>
   state.filters.filtersLoadingStatus
 
-export const {
-  filtersFetching,
-  filtersFetched,
-  filtersFetchingError,
-  setActiveFilter,
-} = filtersSlice.actions
+export const { setActiveFilter } = filtersSlice.actions
 export default filtersSlice.reducer
