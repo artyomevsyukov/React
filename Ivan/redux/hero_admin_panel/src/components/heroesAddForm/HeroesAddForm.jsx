@@ -15,17 +15,35 @@ const HeroesAddForm = () => {
   const { request } = useHttp()
   const dispatch = useDispatch()
 
-  const handleAddHero = (hero) => {
-    request(`http://localhost:3001/heroes`, "POST", JSON.stringify(hero), {
-      "Content-Type": "application/json",
-    })
-      .then((data) => {
-        dispatch(addHero(data))
-        setName("")
-        setDescription("")
-        setElement("")
-      })
-      .catch((error) => console.log("Ошибка создания героя", error))
+  // const handleAddHero = (hero) => {
+  //   request(`http://localhost:3001/heroes`, "POST", JSON.stringify(hero), {
+  //     "Content-Type": "application/json",
+  //   })
+  //     .then((data) => {
+  //       dispatch(addHero(data))
+  //       setName("")
+  //       setDescription("")
+  //       setElement("")
+  //     })
+  //     .catch((error) => console.log("Ошибка создания героя", error))
+  // }
+
+  const handleAddHero = async (hero) => {
+    try {
+      const data = await request(
+        `http://localhost:3001/heroes`,
+        "POST",
+        JSON.stringify(hero),
+        { "Content-Type": "application/json" }
+      )
+
+      dispatch(addHero(data))
+      setName("")
+      setDescription("")
+      setElement("")
+    } catch (error) {
+      console.log("Ошибка создания героя", error)
+    }
   }
 
   const handleSubmit = (e) => {
