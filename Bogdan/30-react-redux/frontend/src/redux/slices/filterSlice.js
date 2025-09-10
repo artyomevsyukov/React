@@ -17,7 +17,7 @@ const filterSlice = createSlice({
       // }
       // return state
       state.title = action.payload
-      //так можно благодоря библиотеке immer
+      //так можно благодаря библиотеке immer
     },
     setAuthorFilter: (state, action) => {
       state.author = action.payload

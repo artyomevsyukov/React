@@ -22,7 +22,7 @@ function Filter() {
   const handleAuthorFilterChange = (e) => {
     dispatch(setAuthorFilter(e.target.value))
   }
-  const handleFavoriteeCheckbox = () => {
+  const handleFavoriteCheckbox = () => {
     dispatch(setFavoriteFilter())
   }
 
@@ -38,7 +38,7 @@ function Filter() {
             value={titleFilter}
             onChange={handleTitleFilterChange}
             type="text"
-            placeholder="Фльтр по названию"
+            placeholder="Фильтр по названию"
           />
         </div>
 
@@ -47,7 +47,7 @@ function Filter() {
             value={authorFilter}
             onChange={handleAuthorFilterChange}
             type="text"
-            placeholder="Фльтр по автору"
+            placeholder="Фильтр по автору"
           />
         </div>
         <div className="filter-group">
@@ -55,7 +55,7 @@ function Filter() {
             <input
               checked={favoriteFilter}
               type="checkbox"
-              onChange={handleFavoriteeCheckbox}
+              onChange={handleFavoriteCheckbox}
             />
             Only Favorite
           </label>
