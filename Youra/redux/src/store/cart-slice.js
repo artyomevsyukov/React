@@ -1,40 +1,55 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    items: [],
-};
+  items: [],
+}
 
 const cartSlice = createSlice({
-    name: "cart",
-    initialState,
-    reducers: {
-        add: (state, action) => {
-            const product = action.payload;
-            const item = state.items.find((i) => i.id === action.payload);
-            console.log(item);
-            if (item) {
-                // Immer
-                item.quantity++;
-                item.total = item.quantity * product.price;
-            } else {
-                state.items.push({
-                    id: product.id,
-                    title: product.title,
-                    price: product.price,
-                    quantity: 1,
-                    total: product.price,
-                });
-            }
-        },
-        clear: (state) => {
-            state.items = [];
-        },
-        increase: (state, action) => console.log("increase"),
-        decrease: (state, action) => console.log("decrease"),
+  name: "cart",
+  initialState,
+  reducers: {
+    add: (state, action) => {
+      const product = action.payload
+      const item = state.items.find((i) => i.id === product.id)
+      if (item) {
+        // Immer
+        item.quantity++
+        item.total = item.quantity * product.price
+      } else {
+        state.items.push({
+          id: product.id,
+          title: product.title,
+          price: product.price,
+          quantity: 1,
+          total: product.price,
+        })
+      }
     },
-});
+    clear: (state) => {
+      state.items = []
+    },
 
-export const selectCartItems = (state) => state.cart.items;
-export const cartActions = cartSlice.actions;
+    increase: (state, action) => {
+      const item = state.items.find((i) => i.id === action.payload)
+      if (item) {
+        item.quantity++
+        item.total = item.quantity * item.price
+      }
+    },
 
-export default cartSlice.reducer;
+    decrease: (state, action) => {
+      const item = state.items.find((i) => i.id === action.payload)
+      if (item && item.quantity > 1) {
+        item.quantity--
+        item.total = item.quantity * item.price
+      } else {
+        state.items = state.items.filter((i) => i.id !== action.payload)
+      }
+    },
+  },
+})
+
+export const selectCartItems = (state) => state.cart.items
+export const cartActions = cartSlice.actions
+
+export default cartSlice.reducer

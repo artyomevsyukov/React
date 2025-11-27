@@ -1,7 +1,7 @@
-import CartButton from "../Cart/CartButton";
-import styles from "./MainHeader.module.css";
+import CartButton from "../Cart/CartButton"
+import styles from "./MainHeader.module.css"
 
-const MainHeader = (props) => {
+const MainHeader = () => {
   return (
     <header className={styles.header}>
       <h1>Redux</h1>
@@ -13,7 +13,7 @@ const MainHeader = (props) => {
         </ul>
       </nav>
     </header>
-  );
-};
+  )
+}
 
-export default MainHeader;
+export default MainHeader
