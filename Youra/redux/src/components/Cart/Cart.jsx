@@ -7,7 +7,7 @@ import { cartActions, selectCartItems } from "../../store/cart-slice"
 const Cart = () => {
   const dispatch = useDispatch()
   const cartItems = useSelector(selectCartItems)
-  console.log("CART cartItems: ", cartItems)
+  // console.log("CART cartItems: ", cartItems)
   if (cartItems.length === 0) {
     return null
     // Заглушку?
